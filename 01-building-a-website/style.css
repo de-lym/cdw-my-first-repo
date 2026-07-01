@@ -2,7 +2,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;  
-  background: linear-gradient(125deg, #3d7eff, #d6ffc9);  
+  background: linear-gradient(180deg, #3d7eff, #e1ffd8);  
   color: #111;                      
   margin: 0;                          
   padding: 0;                         
@@ -19,21 +19,22 @@ header {
 }
 
 header .left {
-  color: #eeeeee;                        
+  color: #262626;                        
 }
 
 header .center {
   font-weight: 400;                   
-  text-align: center;                 
+  text-align: center;  
+  color: #262626;                
 }
 
 header .center span {
   font-size: 12px;                    
-  color: #eeeeee;                      
+  color: #262626;                       
 }
 
 header .right a {
-  color: #000;                        
+  color: #262626;                      
   text-decoration: none;              
   font-weight: 400;                   
 }
@@ -46,27 +47,28 @@ main {
 
 .project-meta {
   font-size: 14px;                    
-  color: #eeeeee;                      
+  color: #02002b;                      
   margin-bottom: 8px;                 
 }
 
 .project-title {
   font-size: 24px;                    
   font-weight: 400;                   
-  margin-bottom: 4px;                 
+  margin-bottom: 4px;
+  color:#02002b;                   
 }
 
 
 .project-subtitle {
   font-size: 16px;                    
-  color: #eeeeee;                      
+  color:#02002b;                      
   margin-bottom: 24px;                
 }
 
 .advisor {
   font-size: 14px;                    
   margin-bottom: 40px;                
-  color: #333;                      
+  color: #111;                     
 }
 
 .section-title {
@@ -74,7 +76,8 @@ main {
   text-transform: uppercase;          
   margin-top: 40px;                   
   margin-bottom: 12px;                
-  font-size: 14px;                    
+  font-size: 14px;  
+  color:#02002b;                  
 }
 
 p {
@@ -85,7 +88,7 @@ p {
 }
 
 button {
-  background-color: #111;          
+  background-color: #02002b;          
   color: white;                    
   border: none;                       
   padding: 12px 24px;                 
