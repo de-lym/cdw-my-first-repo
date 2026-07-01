@@ -1,10 +1,17 @@
+function showMessage() {
+  const message = document.getElementById("message");
+  message.textContent = "You clicked the button!";
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    
     console.log('JavaScript is now running!'); 
 
     const button = document.getElementById('demoButton');
     const messageArea = document.getElementById('messageDisplay');
     
     button.addEventListener('click', function() {
+        
         console.log('Button was clicked!'); 
         
         const currentTime = new Date().toLocaleTimeString(); // Get current time
@@ -16,6 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         setTimeout(function() {
             button.textContent = 'Click Me!';
-        }, 2000); // milliseconds
+        }, 2000); // millisecond
     });
 });

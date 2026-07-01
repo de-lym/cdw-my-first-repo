@@ -2,16 +2,71 @@
 
 body {
   font-family: 'Roboto', sans-serif;  
-  background-color: #ffffff;  
+  background: linear-gradient(125deg, #3d7eff, #d6ffc9);  
   color: #111;                      
   margin: 0;                          
-  padding: 0;                                      
+  padding: 0;                         
+  min-height: 100vh;                  
+}
+
+header {
+  display: flex;                      
+  justify-content: space-between;     
+  align-items: center;                
+  padding: 24px 40px;                 
+  border-bottom: 1px solid #ccc;    
+  font-size: 14px;                    
+}
+
+header .left {
+  color: #eeeeee;                        
+}
+
+header .center {
+  font-weight: 400;                   
+  text-align: center;                 
+}
+
+header .center span {
+  font-size: 12px;                    
+  color: #eeeeee;                      
+}
+
+header .right a {
+  color: #000;                        
+  text-decoration: none;              
+  font-weight: 400;                   
 }
 
 main {
   max-width: 800px;                   
   margin: 60px auto;                  
   padding: 0 20px;                    
+}
+
+.project-meta {
+  font-size: 14px;                    
+  color: #eeeeee;                      
+  margin-bottom: 8px;                 
+}
+
+.project-title {
+  font-size: 24px;                    
+  font-weight: 400;                   
+  margin-bottom: 4px;                 
+}
+
+
+.project-subtitle {
+  font-size: 16px;                    
+  color: #eeeeee;                      
+  margin-bottom: 24px;                
+}
+
+.advisor {
+  font-size: 14px;                    
+  margin-bottom: 40px;                
+  color: #333;                      
 }
 
 .section-title {
@@ -22,12 +77,22 @@ main {
   font-size: 14px;                    
 }
 
+p {
+  font-size: 16px;                    
+  line-height: 1.6;                   
+  margin-bottom: 24px;                
+  color: #111;                        
+}
+
 button {
   background-color: #111;          
   color: white;                    
   border: none;                       
-  padding: 12px 24px;                                   
-  cursor: pointer;                   
+  padding: 12px 24px;                 
+  font-size: 14px;                    
+  font-weight: 400;                   
+  cursor: pointer;                    
+  margin-bottom: 20px;                
   transition: background-color 0.3s;  
   border-radius: 4px;                 
 }
@@ -36,7 +101,9 @@ button:hover {
   background-color: #333;            
 }
 
-#messageDisplay {                 
+#messageDisplay {
+  font-size: 16px;                    
+  line-height: 1.6;                   
   margin-top: 20px;                   
   padding: 16px;                      
   border: 1px solid #ccc;            
