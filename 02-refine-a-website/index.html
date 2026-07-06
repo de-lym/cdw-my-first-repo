@@ -1,59 +1,46 @@
-<!-- computational design workspaces tutorial #1 -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  
   <meta charset="UTF-8">
-  <title>Module 1</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=Space+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   
 </head>
 
 <body>
-  
-  <header>
-    
-    <div class="left">Columbia GSAPP</div>  
-    <div class="center">
 
-      Computational Design Practices<br>
-      <span>Project Archive</span>
+  <div class="sky" aria-hidden="true">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <div class="cloud cloud-4"></div>
+    <div class="cloud cloud-5"></div>
+  </div>
 
-    </div>
-    
-    <div class="right"><a href="#">About</a></div>
+  <div class="liminal-pool" aria-hidden="true"></div>
 
-  </header>
+  <div class="vhs-overlay" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
 
-  <main>
-    
-    
-    <div class="project-meta">2026</div>
-    <div class="project-title">Project Title</div>
-    <div class="project-subtitle">Dong Eun Lim</div>
-    <div class="advisor">Advisor<br><strong>Advisor Name</strong></div>
-    
-    <div class="section-title">Abstract</div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-    
-    <div class="section-title">Motivation</div>
-    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
-    
-    <div class="section-title">Methodology</div>
-    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
-    
-    <div class="section-title">Interactive Demo</div>
-    <p>Click the button below to see JavaScript in action:</p>
-    <button id="demoButton">Click Me!</button>
-    <div id="messageDisplay"></div>
-
+  <main class="bubble-field" aria-label="homepage">
+    <button type="button" class="bubble" data-letter="h" style="--x: 14%; --y: 22%;" aria-label="Open Home">h</button>
+    <button type="button" class="bubble" data-letter="o" style="--x: 28%; --y: 38%;" aria-label="Open Origin">0</button>
+    <button type="button" class="bubble" data-letter="m" style="--x: 44%; --y: 18%;" aria-label="Open Motivation">m</button>
+    <button type="button" class="bubble" data-letter="e" style="--x: 58%; --y: 42%;" aria-label="Open Methodology">3</button>
+    <button type="button" class="bubble" data-letter="p" style="--x: 72%; --y: 24%;" aria-label="Open Project">p</button>
+    <button type="button" class="bubble" data-letter="a" style="--x: 22%; --y: 58%;" aria-label="Open Abstract">@</button>
+    <button type="button" class="bubble" data-letter="g" style="--x: 50%; --y: 62%;" aria-label="Open Gallery">g</button>
+    <button type="button" class="bubble" data-letter="e2" style="--x: 78%; --y: 55%;" aria-label="Open Interactive Demo">e</button>
   </main>
 
-  <script src="script.js"></script>
+  <div id="popupLayer" class="popup-layer" aria-live="polite"></div>
 
+  <script src="script.js"></script>
 </body>
 </html>
