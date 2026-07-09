@@ -1,4 +1,4 @@
-/* import font */
+/* font for the main page */
 .bagel-fat-one-regular {
   font-family: "Bagel Fat One", system-ui;
   font-weight: 400;
@@ -296,9 +296,15 @@ body {
 .popup-window {
   position: absolute;
   width: min(360px, calc(100vw - 40px));
+  min-width: 260px;
+  min-height: 160px;
+  max-width: calc(100vw - 24px);
+  max-height: calc(100vh - 24px);
   border-radius: 8px;
   overflow: hidden;
   pointer-events: auto;
+  display: flex;
+  flex-direction: column;
   box-shadow:
     0 16px 48px rgba(80, 60, 120, 0.22),
     0 0 0 1px rgba(255, 255, 255, 0.5);
@@ -325,6 +331,10 @@ body {
     0 0 0 1px rgba(255, 255, 255, 0.65);
 }
 
+.popup-window.resizing {
+  transition: none;
+}
+
 .window-bar {
   display: flex;
   align-items: center;
@@ -334,6 +344,7 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
   cursor: grab;
   user-select: none;
+  flex: 0 0 auto;
 }
 
 .window-bar:active {
@@ -378,7 +389,7 @@ body {
 .window-body {
   padding: 20px;
   background: var(--window-bg);
-  max-height: min(420px, 55vh);
+  flex: 1 1 auto;
   overflow-y: auto;
 }
 
@@ -423,6 +434,8 @@ body {
   box-shadow: 0 0 20px rgba(200, 160, 220, 0.35);
 }
 
+/* gallery images grid layout */
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -456,6 +469,82 @@ body.dream-mode .liminal-pool {
   height: 32vh;
   transition: height 2s ease;
 }
+
+/* ── spatial canvas blocks (2D / 3D popups) ── */
+
+.canvas-block {
+  margin-bottom: 20px;
+}
+
+.canvas-block:last-child {
+  margin-bottom: 0;
+}
+
+.canvas-caption {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: lowercase;
+  color: var(--text-soft);
+  margin: 0 0 6px;
+}
+
+.p5-container,
+.three-container {
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  line-height: 0;
+  background: rgba(42, 32, 64, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
+.p5-container canvas,
+.three-container canvas {
+  display: block;
+}
+
+/* ── resize handles ── */
+
+.resize-handle {
+  position: absolute;
+  z-index: 5;
+}
+
+.resize-handle.resize-n,
+.resize-handle.resize-s {
+  left: 10px;
+  right: 10px;
+  height: 8px;
+  cursor: ns-resize;
+}
+
+.resize-handle.resize-n { top: -4px; }
+.resize-handle.resize-s { bottom: -4px; }
+
+.resize-handle.resize-e,
+.resize-handle.resize-w {
+  top: 10px;
+  bottom: 10px;
+  width: 8px;
+  cursor: ew-resize;
+}
+
+.resize-handle.resize-e { right: -4px; }
+.resize-handle.resize-w { left: -4px; }
+
+.resize-handle.resize-ne,
+.resize-handle.resize-nw,
+.resize-handle.resize-se,
+.resize-handle.resize-sw {
+  width: 14px;
+  height: 14px;
+}
+
+.resize-handle.resize-ne { top: -4px; right: -4px; cursor: nesw-resize; }
+.resize-handle.resize-nw { top: -4px; left: -4px; cursor: nwse-resize; }
+.resize-handle.resize-se { bottom: -4px; right: -4px; cursor: nwse-resize; }
+.resize-handle.resize-sw { bottom: -4px; left: -4px; cursor: nesw-resize; }
 
 /* ── responsive ── */
 
