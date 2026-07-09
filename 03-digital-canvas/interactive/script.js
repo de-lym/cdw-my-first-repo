@@ -695,19 +695,30 @@ function initThreeAtmosphere(container) {
       );
     });
 
+    // checking on the user interaction
     if (pointerActive) {
       spot.target.position.x += (pointer.x * 2.4 - spot.target.position.x) * 0.05;
       spot.target.position.z += (-pointer.y * 2.4 - spot.target.position.z) * 0.05;
     }
 
+    // gradual change of the light intensity
     pulseLight.intensity += (1.6 - pulseLight.intensity) * 0.03;
 
+    // updates every active pulse effect -> allows multiple animations to play simultaneously
     for (let i = pulses.length - 1; i >= 0; i--) {
+
+      // tracks how far along each pulse is
       const pulse = pulses[i];
       pulse.t += 0.05;
+
+      // creates an easing effect to make the pulse grow and shrink naturally
       const eased = Math.sin(Math.min(pulse.t, 1) * Math.PI);
+
+      // changes the pulse's size and adjusts the brightness of the pulse
       pulse.mesh.scale.setScalar(1 + eased * 0.6);
       pulse.mesh.material.emissiveIntensity = 0.35 + eased * 1.2;
+
+      // detects when the animation isn complete
       if (pulse.t >= 1) {
         pulse.mesh.scale.setScalar(1);
         pulse.mesh.material.emissiveIntensity = 0.35;
@@ -715,21 +726,31 @@ function initThreeAtmosphere(container) {
       }
     }
 
+    // updates OrbitControls and draws teh updated scene
     controls.update();
     renderer.render(scene, camera);
   }
+
+  // begins the animation loop
   animate();
 
+  // updates the renderer when the container sized changes
   container._resize = function () {
     const size = containerSize(container);
+
+    // adjusts the camera aspect ratio
     camera.aspect = size.w / size.h;
     camera.updateProjectionMatrix();
     renderer.setSize(size.w, size.h);
   };
 
+  // cleans up the entire Three.js scene to prevent memory leaks
   container._dispose = function () {
+    // stops future animation frames
     running = false;
     if (rafId) cancelAnimationFrame(rafId);
+
+    // removes moust event handlers 
     renderer.domElement.removeEventListener('pointermove', onPointerMove);
     renderer.domElement.removeEventListener('pointerdown', onPointerDown);
     controls.dispose();
@@ -741,6 +762,8 @@ function initThreeAtmosphere(container) {
       mesh.geometry.dispose();
       mesh.material.dispose();
     });
+
+    // removes the renderer from the webpage
     if (renderer.domElement.parentNode) {
       renderer.domElement.parentNode.removeChild(renderer.domElement);
     }
@@ -751,10 +774,13 @@ function initThreeAtmosphere(container) {
 function attachDynamicCanvases(popup, key) {
   let containers = [];
 
+  // loads p5.js canvases
   if (key === 'e') {
     containers = Array.from(popup.querySelectorAll('.p5-container'));
     if (containers[0]) initP5Static(containers[0]);
     if (containers[1]) initP5Animated(containers[1]);
+    
+    // loads Three.js scenes
   } else if (key === 'a') {
     containers = Array.from(popup.querySelectorAll('.three-container'));
     if (containers[0]) initThreeOrbit(containers[0]);
@@ -764,6 +790,8 @@ function attachDynamicCanvases(popup, key) {
   if (!containers.length) return;
 
   let frame = null;
+
+  // keeps the canvas correctly sized
   const ro = new ResizeObserver(function () {
     if (frame) cancelAnimationFrame(frame);
     frame = requestAnimationFrame(function () {
@@ -774,6 +802,7 @@ function attachDynamicCanvases(popup, key) {
   });
   ro.observe(popup);
 
+  // disconnects observers and disposes of canvases
   popup._canvasCleanup = function () {
     ro.disconnect();
     containers.forEach(function (c) {
@@ -784,18 +813,24 @@ function attachDynamicCanvases(popup, key) {
 
 /* ──────────────────────────────────────────────────────────── */
 
+// creates and displays a pop up browser
 function openPopup(key, anchorRect) {
+
+  // retrieves the popup data
   const content = letterContent[key];
   if (!content) return;
-
+  
+  // tracks numer of popups that are open
   const layer = document.getElementById('popupLayer');
   popupCount += 1;
 
   const size = DEFAULT_SIZES[key] || DEFAULT_SIZES.DEFAULT;
   const offset = ((popupCount - 1) % 5) * 24;
+
+  // creates the popup element
   const popup = document.createElement('div');
   popup.className = 'popup-window';
-
+  // popup location data
   const left = anchorRect
     ? Math.min(anchorRect.left + offset, window.innerWidth - size.width - 16)
     : 48 + offset;
@@ -803,11 +838,13 @@ function openPopup(key, anchorRect) {
     ? Math.min(anchorRect.top + offset, window.innerHeight - size.height - 16)
     : 80 + offset;
 
+  // places the popup near the clicked bubble
   popup.style.left = `${Math.max(16, left)}px`;
   popup.style.top = `${Math.max(16, top)}px`;
   popup.style.width = `${size.width}px`;
   popup.style.height = `${size.height}px`;
 
+  // creates the title bar, buttons, and content
   popup.innerHTML = `
     <div class="window-bar">
       <button type="button" class="dot red close-btn" aria-label="Close window"></button>
@@ -818,6 +855,7 @@ function openPopup(key, anchorRect) {
     <div class="window-body">${content.html}</div>
   `;
 
+  // closes the popup
   popup.querySelector('.close-btn').addEventListener('click', function () {
     popup.classList.remove('open');
     popup.classList.add('closing');
@@ -827,10 +865,12 @@ function openPopup(key, anchorRect) {
     }, 240);
   });
 
+  // brings the selected popup to the front
   popup.addEventListener('mousedown', function () {
     focusPopup(popup);
   });
 
+  // adds an interactivve feature inside the popup through pool.exe -> need to revise
   const poolBtn = popup.querySelector('.pool-btn');
   if (poolBtn) {
     poolBtn.addEventListener('click', function () {
@@ -842,10 +882,13 @@ function openPopup(key, anchorRect) {
     });
   }
 
+  // enables dragging and resizing
   layer.appendChild(popup);
   makeDraggable(popup, popup.querySelector('.window-bar'));
   makeResizable(popup);
 
+  // waits until the popup has been added to the page before animating
+  // ensures the opening animation and dynamic canvases initialize correctly
   requestAnimationFrame(function () {
     popup.classList.add('open');
     focusPopup(popup);
@@ -853,10 +896,16 @@ function openPopup(key, anchorRect) {
   });
 }
 
+// waits unit the HTML page has finished loading
+// ensures all elements exist before attaching event listeners
 document.addEventListener('DOMContentLoaded', function () {
+
+  // finds every bubble element
   document.querySelectorAll('.bubble').forEach(function (bubble) {
+    // deptect when a bubble is clicked
     bubble.addEventListener('click', function () {
       const key = bubble.dataset.letter;
+      // oopens the correct popup and positions it according to the assigned coordinates
       openPopup(key, bubble.getBoundingClientRect());
     });
   });
