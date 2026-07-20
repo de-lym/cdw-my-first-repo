@@ -1125,107 +1125,32 @@ function initNetworkDiagram(popup) {
   // ids never collide with another 'g' popup open at the same time
   const uid = 'nd' + Math.random().toString(36).slice(2, 9);
 
-  /* ---- 1. data: two small CSV tables, parsed with d3.csvParse ----
-     (kept inline rather than fetched from a file so this widget has no
-     dependency on anything outside script.js) */
-  const nodesCSV = `id,label,category,era,description,importance
-ancient_incubation,Dream Incubation,Cultural-Historical,c.1500 BCE,Ancient Egyptian and Greek practice of sleeping in temples to receive prophetic dreams,3
-aboriginal_dreamtime,Aboriginal Dreamtime,Cultural-Historical,Pre-1788,Australian Aboriginal cosmology where dreams connect to ancestral creation and ongoing spiritual reality,3
-biblical_dreams,Biblical Dream Interpretation,Cultural-Historical,c.500 BCE,"Dreams as divine messages requiring interpretation, seen in Hebrew and early Christian texts",2
-artemidorus,Artemidorus,Theorist,2nd century CE,"Author of Oneirocritica, one of the earliest systematic dream interpretation manuals",3
-freud,Sigmund Freud,Theorist,1899,Founder of psychoanalysis; proposed dreams as disguised fulfillment of unconscious wishes,5
-wish_fulfillment,Wish Fulfillment,Concept,1899,Freud's theory that dreams express repressed desires in symbolic form,4
-manifest_latent,Manifest vs Latent Content,Concept,1899,Freud's distinction between a dream's surface story and its hidden true meaning,4
-unconscious_mind,The Unconscious Mind,Concept,1899,The reservoir of repressed thoughts and desires theorized to drive dream content,5
-dream_work,Dream-Work,Concept,1899,Freud's term for the mental processes that disguise latent content into manifest imagery,3
-jung,Carl Jung,Theorist,1916,Former Freud collaborator who broke away to found analytical psychology,5
-collective_unconscious,Collective Unconscious,Concept,1916,Jung's theory of shared ancestral memory and symbolism underlying all human minds,4
-archetypes,Archetypes,Concept,1919,"Jung's universal symbolic figures (Shadow, Anima, Self) recurring across dreams and myths",4
-individuation,Individuation,Concept,1921,"Jung's process of psychological integration, often traced through dream symbolism",3
-adler,Alfred Adler,Theorist,1912,"Broke from Freud to found individual psychology, viewing dreams as tied to compensation for felt inferiority",3
-compensation_theory,Compensation Theory,Concept,1912,Adler's idea that dreams help the psyche work through feelings of inferiority,2
-hall,Calvin Hall,Theorist,1953,Developed the cognitive theory of dreams and a system for content-analyzing dream reports,3
-cognitive_theory,Cognitive Theory of Dreams,School,1953,Views dreams as reflections of a dreamer's everyday concerns and conceptions of self and others,3
-hobson_mccarley,Hobson and McCarley,Theorist,1977,"Neuroscientists who proposed the activation-synthesis model, challenging Freudian dream theory",5
-activation_synthesis,Activation-Synthesis Model,Concept,1977,Theory that dreams arise from the brain synthesizing meaning from random brainstem activity during REM,4
-rem_sleep,REM Sleep,Concept,1953,Rapid Eye Movement sleep stage discovered to correlate strongly with vivid dreaming,4
-biological_school,Neurocognitive-Biological School,School,1977,Approach explaining dreams primarily through brain physiology rather than symbolic meaning,4
-revonsuo,Antti Revonsuo,Theorist,2000,Proposed the threat simulation theory as an evolutionary explanation for dreaming,3
-threat_simulation,Threat Simulation Theory,Concept,2000,Evolutionary theory that dreaming rehearses threat perception and avoidance for survival,3
-evolutionary_school,Evolutionary School,School,2000,Framework explaining dreaming as an adaptive trait shaped by natural selection,3
-memory_consolidation,Memory Consolidation Theory,Concept,2010,Theory that dreaming helps process and consolidate memories and learning from waking life,3
-domhoff,William Domhoff,Theorist,1996,Continued Hall's content-analysis approach and critiqued purely biological dream theories,3
-cartwright,Rosalind Cartwright,Theorist,1977,Researched dreams' role in emotional regulation and mood processing,3
-emotional_regulation,Emotional Regulation Theory,Concept,1977,Theory that dreaming helps process and regulate emotional experiences from waking life,2
-lucid_dreaming,Lucid Dreaming,Concept,1913,"State of being aware one is dreaming while still asleep, studied scientifically since the 20th century",3
-laberge,Stephen LaBerge,Theorist,1980,Pioneered scientific research and induction techniques for lucid dreaming,3
-psychoanalytic_school,Psychoanalytic School,School,1899,Broad tradition treating dreams as windows into unconscious conflict and desire,5
-analytical_psychology,Analytical Psychology,School,1916,Jungian tradition treating dreams as sources of symbolic and archetypal meaning,4
-surrealism,Surrealist Art,Application,1924,Art movement led by Dali and Breton directly inspired by Freudian dream theory,4
-psychotherapy_practice,Modern Psychotherapy,Application,1900,Continued clinical use of dream interpretation in various forms of talk therapy,4
-film_dream_logic,Film and Dream Logic,Application,1945,"Cinema's use of dream sequences and non-linear dream logic, from Hitchcock to Lynch",3
-pop_psychology,Pop Psychology and Dream Dictionaries,Application,1970,"Popularized, often oversimplified dream symbol interpretation for mass audiences",2
-dream_journaling_apps,Dream Journaling Apps,Application,2015,Modern digital tools for recording and pattern-analyzing personal dreams,2
-sleep_science,Sleep Science and Neuroscience,Application,1953,Academic and clinical field studying sleep architecture and dream physiology,4`;
+  /* ---- 1. data: load nodes.csv / edges.csv from disk with d3.csv. Fetching
+     local files needs the page served over http(s) -- see the catch below
+     for what happens if it's opened directly as a file:// URL instead.
+     Everything that actually builds the diagram happens in
+     buildNetworkDiagram() below, only once both files have arrived. ---- */
+  Promise.all([
+    d3.csv("nodes.csv"),
+    d3.csv("edges.csv")
+  ]).then(([nodes, links]) => {
+    buildNetworkDiagram(popup, uid, nodes, links);
+  }).catch(err => {
+    console.error(err);
+    const bodyEl = popup.querySelector(".window-body");
+    bodyEl.innerHTML =
+      '<p style="padding:24px;font-family:sans-serif;line-height:1.6">' +
+      'Could not load <code>nodes.csv</code> / <code>edges.csv</code>.<br>' +
+      'This page must be served over http(s) rather than opened directly as a file.<br>' +
+      'From this folder, run <code>python3 -m http.server 8000</code> and open ' +
+      '<code>http://localhost:8000/index.html</code>.</p>';
+  });
+}
 
-  const edgesCSV = `source,target,type,weight,description
-ancient_incubation,artemidorus,precedes,2,Temple dream practices preceded systematic interpretation manuals
-biblical_dreams,artemidorus,precedes,1,Divine-message dream traditions influenced later interpretive frameworks
-artemidorus,freud,precedes,2,Early interpretation manuals prefigured symbolic dream analysis
-aboriginal_dreamtime,jung,interprets,1,Parallels drawn between Dreamtime cosmology and collective unconscious concepts
-freud,wish_fulfillment,developed,3,Freud originated this theory as the core of his dream theory
-freud,manifest_latent,developed,3,Freud proposed this structural distinction for dream content
-freud,unconscious_mind,developed,3,Central concept underlying all of Freud's psychoanalytic theory
-freud,dream_work,developed,3,Freud described the mechanisms disguising latent dream content
-wish_fulfillment,unconscious_mind,developed,2,Wish fulfillment operates through unconscious desire
-manifest_latent,dream_work,developed,2,Dream-work is the process converting latent into manifest content
-freud,psychoanalytic_school,developed,3,Freud founded this school of thought
-freud,jung,influenced,3,Jung was Freud's close collaborator before their theoretical split
-jung,collective_unconscious,developed,3,Jung's foundational departure from Freudian personal unconscious
-jung,archetypes,developed,3,Jung identified archetypes as recurring dream and mythic figures
-jung,individuation,developed,2,Jung linked dream symbolism to the individuation process
-jung,analytical_psychology,developed,3,Jung founded this school after breaking from Freud
-jung,unconscious_mind,contested,2,Jung redefined the unconscious as collective rather than purely personal
-freud,adler,influenced,2,Adler was originally part of Freud's inner circle before his break
-adler,compensation_theory,developed,2,Adler proposed dreams compensate for felt inferiority
-adler,unconscious_mind,contested,1,"Adler reframed unconscious motivation around social striving, not repression"
-hall,cognitive_theory,developed,3,Hall founded the cognitive theory of dreams
-hall,domhoff,influenced,2,Domhoff extended Hall's content-analysis methodology
-cognitive_theory,domhoff,developed,2,Domhoff continued developing cognitive dream theory
-hobson_mccarley,activation_synthesis,developed,3,Hobson and McCarley proposed this neuroscience-based model
-hobson_mccarley,rem_sleep,developed,2,Their model was grounded in REM sleep neurophysiology
-hobson_mccarley,biological_school,developed,3,They helped found the neurocognitive-biological approach
-hobson_mccarley,freud,contested,3,Their model directly challenged Freudian symbolic dream theory
-hobson_mccarley,wish_fulfillment,contested,2,Activation-synthesis rejected wish fulfillment as the source of dream content
-rem_sleep,sleep_science,precedes,2,Discovery of REM sleep enabled the modern scientific study of dreaming
-revonsuo,threat_simulation,developed,3,Revonsuo proposed this evolutionary theory of dreaming
-revonsuo,evolutionary_school,developed,3,Revonsuo helped establish this school of dream theory
-threat_simulation,biological_school,influenced,1,Threat simulation theory builds on biological dream research
-threat_simulation,freud,contested,1,Offers a survival-based alternative to symbolic wish fulfillment
-memory_consolidation,rem_sleep,influenced,2,Memory consolidation theory draws on REM sleep research
-memory_consolidation,sleep_science,developed,2,This theory emerged from sleep science research
-cartwright,emotional_regulation,developed,2,Cartwright researched dreams' role in emotional processing
-cartwright,sleep_science,influenced,2,Cartwright's research contributed to clinical sleep science
-emotional_regulation,memory_consolidation,influenced,1,Both theories link dreaming to overnight cognitive-emotional processing
-laberge,lucid_dreaming,developed,3,LaBerge pioneered scientific study and induction of lucid dreaming
-lucid_dreaming,rem_sleep,precedes,1,Lucid dreaming research relies on REM sleep monitoring
-freud,surrealism,applied_to,3,Surrealist artists directly drew on Freudian dream theory
-jung,surrealism,applied_to,1,Archetypal imagery also influenced surrealist symbolism
-psychoanalytic_school,psychotherapy_practice,applied_to,3,Psychoanalytic dream interpretation shaped modern therapeutic practice
-analytical_psychology,psychotherapy_practice,applied_to,2,Jungian dream work remains used in contemporary therapy
-surrealism,film_dream_logic,influenced,2,Surrealist visual language shaped cinematic dream sequences
-freud,film_dream_logic,applied_to,1,Psychoanalytic dream logic influenced early cinematic dream depictions
-psychoanalytic_school,pop_psychology,applied_to,2,Simplified Freudian symbolism spread into popular dream dictionaries
-analytical_psychology,pop_psychology,applied_to,1,Jungian archetypes were popularized in mass-market dream interpretation
-cognitive_theory,dream_journaling_apps,applied_to,2,Content-analysis approaches inform modern dream tracking tools
-lucid_dreaming,dream_journaling_apps,applied_to,1,Dream journaling supports lucid dreaming practice and recall
-sleep_science,dream_journaling_apps,influenced,1,Sleep science findings inform app-based dream tracking features
-biological_school,sleep_science,developed,2,The biological school is grounded in ongoing sleep science research`;
+// builds the actual diagram once nodes.csv / edges.csv have loaded and been parsed
+function buildNetworkDiagram(popup, uid, nodes, links) {
 
-  const nodes = d3.csvParse(nodesCSV);
-  const links = d3.csvParse(edgesCSV);
-
-  // CSV values arrive as strings — convert the two numeric columns we actually use
+  // CSV values arrive as strings -- convert the numeric columns
   nodes.forEach(d => d.importance = +d.importance);
   links.forEach(d => d.weight = +d.weight);
 
@@ -1573,10 +1498,19 @@ biological_school,sleep_science,developed,2,The biological school is grounded in
     cursorCard.classList.add("visible");
   }
   function positionCard(event) {
+    // .popup-window has a CSS `transform` on it (for its open/close scale
+    // animation), which makes it the containing block for any
+    // position:fixed descendant -- including this card. So "fixed" here
+    // is actually relative to the popup's own box, not the real browser
+    // viewport. Measure against the popup's own rect instead of
+    // window.innerWidth/innerHeight, or the card ends up placed as if the
+    // popup were full-screen and can land outside its visible bounds.
+    const popupRect = popup.getBoundingClientRect();
     const cardW = cursorCard.offsetWidth, cardH = cursorCard.offsetHeight;
-    let x = event.clientX + 3, y = event.clientY + 3;
-    if (x + cardW > window.innerWidth - 12) x = event.clientX - cardW - 18;
-    if (y + cardH > window.innerHeight - 12) y = event.clientY - cardH - 18;
+    let x = event.clientX - popupRect.left + 10;
+    let y = event.clientY - popupRect.top + 10;
+    if (x + cardW > popupRect.width - 12) x = event.clientX - popupRect.left - cardW - 18;
+    if (y + cardH > popupRect.height - 12) y = event.clientY - popupRect.top - cardH - 18;
     cursorCard.style.left = x + "px";
     cursorCard.style.top = y + "px";
   }

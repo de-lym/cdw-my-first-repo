@@ -747,10 +747,17 @@ body.dream-mode .liminal-pool {
 }
 
 /* ── canvas: force-layout nodes/links live inside this svg ── */
-.network-diagram svg{ 
+/* scoped to the stage's direct-child svg only, so it doesn't also stretch
+   the small line-swatch <svg> icons nested inside the legend below */
+.network-diagram .nd-stage > svg{ 
   width:100%;
   height:100%; 
   display:block; 
+}
+
+.network-diagram .line-swatch{
+  width: 18px;
+  height: 8px;
 }
 .network-diagram #bgrect{ cursor: grab; }
 .network-diagram #bgrect:active{ cursor: grabbing; }
