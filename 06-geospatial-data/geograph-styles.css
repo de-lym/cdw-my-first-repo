@@ -1,0 +1,192 @@
+/* ============================================================
+   Nightfall sleep map — scoped popup styles (bubble "e2")
+   ------------------------------------------------------------
+   Append this block to style.css. Everything is namespaced under
+   .nightfall-embed, the same isolation strategy as .network-diagram
+   (the 'g' popup) — its own color variables and layout rules live in
+   here, so it can't leak into, or be affected by, the rest of the site.
+
+   - Background forced to white, as requested.
+   - Nightfall's own accent color codes (ember amber, dusk violet) are
+     kept exactly as they were on the original dark page.
+   - The neutrals (background/ink/line) were flipped from light-on-dark
+     to dark-on-light — the original --moon-100 light text would be
+     invisible on a white background, so this swaps in a dark ink tone
+     for text instead while leaving the accent hues untouched.
+   - Titles/headings map to IBM Plex Mono, body text to Space Mono —
+     both are already loaded site-wide via the Google Fonts <link> in
+     index.html, so no extra font import is needed here.
+   ============================================================ */
+
+.nightfall-embed {
+  --nf-bg: #ffffff;
+  --nf-panel: #f6f5f2;
+  --nf-line: #d8d6cf;
+  --nf-ink-900: #1b1f2b;
+  --nf-ink-600: #52586a;
+  --nf-ember-400: #e8a25c;
+  --nf-ember-300: #f0bd85;
+  --nf-dusk-400: #7d6bc4;
+  --nf-dusk-300: #a698e0;
+  --nf-no-data: #dcdaf0;
+
+  --nf-font-display: "IBM Plex Mono", "Courier New", monospace;
+  --nf-font-body: "Space Mono", "Courier New", monospace;
+
+  background: var(--nf-bg);
+  color: var(--nf-ink-900);
+  font-family: var(--nf-font-body);
+  height: 100%;
+  overflow-y: auto;
+  padding: 20px 22px 26px;
+}
+
+.nightfall-embed .nf-eyebrow {
+  font-family: var(--nf-font-display);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--nf-dusk-400);
+  margin: 0 0 10px;
+}
+
+.nightfall-embed .nf-title {
+  font-family: var(--nf-font-display);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1;
+  margin: 0;
+  color: var(--nf-ink-900);
+}
+
+.nightfall-embed .nf-dim { color: var(--nf-ember-400); }
+
+.nightfall-embed .nf-sub {
+  font-family: var(--nf-font-body);
+  font-size: 13px;
+  color: var(--nf-ink-600);
+  max-width: 42em;
+  margin: 10px 0 18px;
+}
+
+.nightfall-embed .nf-map-panel {
+  position: relative;
+  border: 1px solid var(--nf-line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--nf-panel);
+}
+
+.nightfall-embed #sleep-map {
+  width: 100%;
+  height: 360px;
+}
+
+.nightfall-embed .nf-legend {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--nf-line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  width: 160px;
+  pointer-events: none;
+}
+
+.nightfall-embed .nf-legend-title {
+  font-family: var(--nf-font-display);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--nf-ink-600);
+  margin-bottom: 8px;
+}
+
+.nightfall-embed .nf-legend-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--nf-ember-400), var(--nf-no-data) 50%, var(--nf-dusk-400));
+}
+
+.nightfall-embed .nf-legend-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-family: var(--nf-font-body);
+  font-size: 10px;
+  color: var(--nf-ink-900);
+}
+
+.nightfall-embed .nf-legend-labels em {
+  font-style: normal;
+  color: var(--nf-ink-600);
+}
+
+.nightfall-embed .nf-legend-note {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--nf-line);
+  font-size: 10px;
+  color: var(--nf-ink-600);
+}
+
+.nightfall-embed .nf-map-caption {
+  padding: 10px 14px;
+  font-family: var(--nf-font-body);
+  font-size: 11px;
+  color: var(--nf-ink-600);
+  border-top: 1px solid var(--nf-line);
+}
+
+.nightfall-embed .nf-writeup p {
+  font-family: var(--nf-font-body);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--nf-ink-600);
+  max-width: 60ch;
+  margin: 16px 0 0;
+}
+
+/* mapbox's own popup, restyled to match, scoped so it never touches
+   any other mapbox instance that might exist elsewhere on the site */
+.nightfall-embed .mapboxgl-popup-content {
+  background: #ffffff;
+  color: var(--nf-ink-900);
+  border: 1px solid var(--nf-line);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-family: var(--nf-font-body);
+  box-shadow: 0 12px 30px -14px rgba(0, 0, 0, 0.35);
+}
+.nightfall-embed .mapboxgl-popup-tip {
+  border-top-color: #ffffff !important;
+  border-bottom-color: #ffffff !important;
+}
+.nightfall-embed .mapboxgl-popup-close-button {
+  color: var(--nf-ink-600);
+  font-size: 16px;
+}
+
+.nightfall-embed .nf-popup-country {
+  font-family: var(--nf-font-display);
+  font-size: 15px;
+  margin: 0 0 6px;
+  color: var(--nf-ink-900);
+}
+
+.nightfall-embed .nf-popup-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  font-family: var(--nf-font-body);
+  font-size: 11px;
+  color: var(--nf-ink-600);
+  padding: 2px 0;
+}
+.nightfall-embed .nf-popup-row strong {
+  color: var(--nf-ink-900);
+  font-weight: 700;
+}

@@ -1,0 +1,228 @@
+/* ============================================================
+   Nightfall — design tokens
+   ============================================================ */
+:root {
+  --ink-950: #0a0e21;
+  --ink-900: #121938;
+  --ink-800: #1b2450;
+  --line-700: #2c3766;
+  --moon-100: #f3efe4;
+  --moon-300: #cfc9ba;
+  --ember-400: #e8a25c;
+  --ember-300: #f0bd85;
+  --dusk-400: #7d6bc4;
+  --dusk-300: #a698e0;
+  --no-data: #3a4270;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "IBM Plex Sans", -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--ink-950);
+  color: var(--moon-100);
+  font-family: var(--font-body);
+}
+
+/* faint scattered stars behind everything */
+.stars {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1.5px 1.5px at 20px 30px, rgba(243,239,228,0.35), transparent),
+    radial-gradient(1px 1px at 120px 80px, rgba(243,239,228,0.25), transparent),
+    radial-gradient(1.5px 1.5px at 210px 160px, rgba(243,239,228,0.3), transparent),
+    radial-gradient(1px 1px at 330px 40px, rgba(243,239,228,0.2), transparent),
+    radial-gradient(1.5px 1.5px at 60px 220px, rgba(243,239,228,0.25), transparent),
+    radial-gradient(1px 1px at 400px 260px, rgba(243,239,228,0.2), transparent);
+  background-repeat: repeat;
+  background-size: 460px 300px;
+  opacity: 0.6;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 64px 24px 40px;
+}
+
+/* ---------- hero ---------- */
+.hero {
+  margin-bottom: 40px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dusk-300);
+  margin: 0 0 18px;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(48px, 9vw, 92px);
+  line-height: 0.95;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.hero-dim { color: var(--ember-400); }
+
+.hero-sub {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--moon-300);
+  max-width: 34em;
+  margin: 18px 0 0;
+}
+
+/* ---------- map ---------- */
+.map-section { margin-bottom: 56px; }
+
+.map-panel {
+  position: relative;
+  border: 1px solid var(--line-700);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--ink-900);
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6);
+}
+
+#sleep-map {
+  width: 100%;
+  height: 560px;
+}
+
+@media (max-width: 640px) {
+  #sleep-map { height: 420px; }
+}
+
+.map-caption {
+  padding: 14px 20px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--moon-300);
+  border-top: 1px solid var(--line-700);
+}
+
+/* legend, floated over the map */
+.legend {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  background: rgba(10, 14, 33, 0.82);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--line-700);
+  border-radius: 10px;
+  padding: 14px 16px;
+  width: 190px;
+  pointer-events: none;
+}
+
+.legend-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--moon-300);
+  margin-bottom: 10px;
+}
+
+.legend-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--ember-400), var(--moon-300) 50%, var(--dusk-400));
+}
+
+.legend-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--moon-100);
+}
+
+.legend-labels em {
+  font-style: normal;
+  color: var(--moon-300);
+}
+
+.legend-note {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line-700);
+  font-size: 11px;
+  color: var(--moon-300);
+}
+
+/* mapbox popup restyle */
+.mapboxgl-popup-content {
+  background: var(--ink-800);
+  color: var(--moon-100);
+  border: 1px solid var(--line-700);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  box-shadow: 0 20px 40px -20px rgba(0,0,0,0.7);
+}
+.mapboxgl-popup-tip { border-top-color: var(--ink-800) !important; border-bottom-color: var(--ink-800) !important; }
+.mapboxgl-popup-close-button { color: var(--moon-300); font-size: 18px; }
+
+.popup-country {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 20px;
+  margin: 0 0 8px;
+}
+
+.popup-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--moon-300);
+  padding: 3px 0;
+}
+
+.popup-row strong { color: var(--moon-100); font-weight: 500; }
+
+/* ---------- write-up ---------- */
+.write-up h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 22px;
+  margin: 36px 0 10px;
+  color: var(--ember-300);
+}
+
+.write-up p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--moon-300);
+  max-width: 62ch;
+}
+
+footer {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line-700);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--moon-300);
+}
