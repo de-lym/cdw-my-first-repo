@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Build Your Own Dream</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dream-composer.css">
+</head>
+<body>
+
+<svg style="position:absolute; width:0; height:0;">
+  <filter id="goo">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="2.6" result="blur"/>
+    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -9" result="goo"/>
+  </filter>
+  <clipPath id="cloud-clip" clipPathUnits="objectBoundingBox">
+    <ellipse cx="0.5" cy="0.62" rx="0.46" ry="0.36" />
+    <circle cx="0.27" cy="0.4" r="0.26" />
+    <circle cx="0.73" cy="0.4" r="0.26" />
+    <circle cx="0.5" cy="0.28" r="0.24" />
+  </clipPath>
+</svg>
+
+<div class="wrap">
+
+  <div class="cloud-deco" style="width:180px; height:90px; top:-10px; right:-20px;">
+    <svg viewBox="0 0 200 100"><path d="M30 75 Q10 75 10 58 Q10 42 28 42 Q30 20 55 20 Q78 20 84 38 Q100 32 112 44 Q135 42 138 62 Q160 62 160 78 Q160 90 145 90 L28 90 Q10 90 10 75 Z" fill="#FFF9E0" opacity="0.95"/></svg>
+  </div>
+  <div class="cloud-deco" style="width:130px; height:66px; top:120px; left:-40px;">
+    <svg viewBox="0 0 200 100"><path d="M30 75 Q10 75 10 58 Q10 42 28 42 Q30 20 55 20 Q78 20 84 38 Q100 32 112 44 Q135 42 138 62 Q160 62 160 78 Q160 90 145 90 L28 90 Q10 90 10 75 Z" fill="#FFF3C4" opacity="0.9"/></svg>
+  </div>
+
+  <p class="eyebrow">Dream Archive</p>
+  <div class="liquid-wrap">
+    <h1 class="liquid-title">Build your<br>own dream.</h1>
+  </div>
+  <p class="sub">Document your own for archive, or create your unique composition. Every entry will be documented on the wall, anonymously.</p>
+
+  <div class="toggle">
+    <button id="tab-write" class="active">make a dream note</button>
+    <button id="tab-assemble">aseemble a dream piece</button>
+  </div>
+
+  <div id="panel-write" class="panel active">
+    <label for="dream-title">title (optional)</label>
+    <input type="text" id="dream-title" placeholder="dreaming" maxlength="60" />
+
+    <label for="dream-text">dreaming</label>
+    <textarea id="dream-text" placeholder="Last night I dreamed..." maxlength="600"></textarea>
+
+    <label>Mood</label>
+    <div class="chip-row" id="mood-chips">
+      <div class="patch patch--a" data-mood="Happy">Happy</div>
+      <div class="patch patch--b" data-mood="Strange">Strange</div>
+      <div class="patch patch--c" data-mood="Scary">Scary</div>
+      <div class="patch patch--a" data-mood="Peaceful">Peaceful</div>
+      <div class="patch patch--b" data-mood="Confusing">Confusing</div>
+    </div>
+
+    <button class="primary" id="submit-write">give us your dream</button>
+    <div class="status" id="status-write"></div>
+  </div>
+
+  <div id="panel-assemble" class="panel">
+
+    <div class="pool-head">
+      <label style="margin:0;">select a fragment, or drag it down, to compose</label>
+      <button class="icon-btn" id="refresh-pool" title="Refresh for new words">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12a9 9 0 1 1-2.64-6.36"/>
+          <polyline points="21 3 21 9 15 9"/>
+        </svg>
+      </button>
+    </div>
+
+    <div id="pool"></div>
+
+    <div class="composition-wrap">
+      <label>your composition</label>
+      <div id="composition"></div>
+    </div>
+
+    <button class="primary" id="submit-assemble" disabled>save my dream creation</button>
+    <div class="status" id="status-assemble"></div>
+  </div>
+
+  <div class="wall" id="dream-wall">
+    <h2>The Dream Wall</h2>
+    <p class="sub">records of contribution, chronologically.</p>
+
+    <div class="mood-bars" id="mood-bars"></div>
+    <button type="button" class="ghost-btn" id="btn-assembled-dreams">see our dream records</button>
+    <div id="feed"><p class="feed-empty">Loading...</p></div>
+  </div>
+
+  <p class="privacy">
+    <strong>Privacy note.</strong> Dreams are stored without names or contact info — please don't include any
+    identifying details in your text either. Entries are used only for this class project, to look at shared
+    patterns across submissions, and may be removed on request.
+  </p>
+
+</div>
+
+<div class="reveal-overlay" id="dream-reveal" aria-hidden="true">
+  <div class="reveal-window">
+    <button type="button" class="reveal-close" id="reveal-close" aria-label="Close">&times;</button>
+    <p class="reveal-eyebrow">your dream</p>
+    <div class="reveal-words" id="reveal-words"></div>
+    <div class="reveal-status" id="reveal-status"></div>
+  </div>
+</div>
+
+<div class="list-overlay" id="assembled-list-overlay" aria-hidden="true">
+  <div class="list-window">
+    <button type="button" class="reveal-close" id="assembled-list-close" aria-label="Close">&times;</button>
+    <p class="reveal-eyebrow">recorded dreams</p>
+    <div id="assembled-list"><p class="feed-empty">Loading...</p></div>
+  </div>
+</div>
+
+<script src="dream-composer.js"></script>
+
+</body>
+</html>

@@ -54,11 +54,18 @@ const letterContent = {
       </div>
     `,
   },
+  // Build Your Dream — the word-composer / dream archive project, behind the 'p' bubble.
+  // It's a full standalone page (own fonts, its own :root color variables like --ink and
+  // --sky-top which collide by name with this site's, its own #goo SVG filter, its own
+  // Firebase wiring). Rather than merge that CSS/JS into the host page and risk those
+  // collisions, it's loaded in an iframe — dream-composer.html/.css/.js, served alongside
+  // index.html — so it stays fully sandboxed and behaves exactly as it does standalone.
   p: {
-    title: 'project.txt',
+    title: 'build-your-dream.html',
     html: `
-      <p class="window-label">abstract</p>
-      <p>Lorem ipsum drifts like fog through empty corridors. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+      <div class="dream-embed">
+        <iframe src="dream-composer.html" title="Build Your Dream" loading="lazy"></iframe>
+      </div>
     `,
   },
 
@@ -192,6 +199,7 @@ const DEFAULT_SIZES = {
   a: { width: 420, height: 640 },
   g: { width: 870, height: 640 },
   e2: { width: 760, height: 640 },
+  p: { width: 480, height: 680 },
   DEFAULT: { width: 360, height: 320 },
 };
 
