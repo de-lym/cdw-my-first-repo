@@ -40,8 +40,7 @@
 
   <div class="toggle">
     <button id="tab-write" class="active">make a dream note</button>
-    <button id="tab-assemble">assemble a dream piece</button>
-    <button id="tab-chat">talk it through</button>
+    <button id="tab-assemble">aseemble a dream piece</button>
   </div>
 
   <div id="panel-write" class="panel active">
@@ -87,25 +86,6 @@
     <div class="status" id="status-assemble"></div>
   </div>
 
-  <div id="panel-chat" class="panel">
-    <p class="sub" style="margin-top:0;">Not sure how to put it into words yet? Talk it through with the dream guide:D</p>
-
-    <div id="chat-messages" aria-live="polite"></div>
-
-    <div class="chat-input-row">
-      <textarea id="chat-input" placeholder="Start anywhere. a feeling, an image, a single word..." maxlength="500" rows="1"></textarea>
-      <button class="icon-btn" id="chat-send" title="Send" aria-label="Send message">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="22" y1="2" x2="11" y2="13"/>
-          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-        </svg>
-      </button>
-    </div>
-    <div class="status" id="status-chat"></div>
-
-    <button class="ghost-btn" id="chat-save" disabled>save this dream to the wall</button>
-  </div>
-
   <div class="wall" id="dream-wall">
     <h2>The Dream Wall</h2>
     <p class="sub">records of contribution, chronologically.</p>
@@ -140,7 +120,6 @@
   </div>
 </div>
 
-<script src="chat-bot.js"></script>
 <script src="dream-composer.js"></script>
 
 </body>

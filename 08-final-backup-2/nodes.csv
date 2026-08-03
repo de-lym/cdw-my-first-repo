@@ -1,0 +1,39 @@
+id,label,category,era,description,importance
+ancient_incubation,Dream Incubation,Cultural-Historical,c.1500 BCE,Ancient Egyptian and Greek practice of sleeping in temples to receive prophetic dreams,3
+aboriginal_dreamtime,Aboriginal Dreamtime,Cultural-Historical,Pre-1788,Australian Aboriginal cosmology where dreams connect to ancestral creation and ongoing spiritual reality,3
+biblical_dreams,Biblical Dream Interpretation,Cultural-Historical,c.500 BCE,Dreams as divine messages requiring interpretation, seen in Hebrew and early Christian texts,2
+artemidorus,Artemidorus,Theorist,2nd century CE,Author of Oneirocritica, one of the earliest systematic dream interpretation manuals,3
+freud,Sigmund Freud,Theorist,1899,Founder of psychoanalysis; proposed dreams as disguised fulfillment of unconscious wishes,5
+wish_fulfillment,Wish Fulfillment,Concept,1899,Freud's theory that dreams express repressed desires in symbolic form,4
+manifest_latent,Manifest vs Latent Content,Concept,1899,Freud's distinction between a dream's surface story and its hidden true meaning,4
+unconscious_mind,The Unconscious Mind,Concept,1899,The reservoir of repressed thoughts and desires theorized to drive dream content,5
+dream_work,Dream-Work,Concept,1899,Freud's term for the mental processes that disguise latent content into manifest imagery,3
+jung,Carl Jung,Theorist,1916,Former Freud collaborator who broke away to found analytical psychology,5
+collective_unconscious,Collective Unconscious,Concept,1916,Jung's theory of shared ancestral memory and symbolism underlying all human minds,4
+archetypes,Archetypes,Concept,1919,Jung's universal symbolic figures (Shadow, Anima, Self) recurring across dreams and myths,4
+individuation,Individuation,Concept,1921,Jung's process of psychological integration, often traced through dream symbolism,3
+adler,Alfred Adler,Theorist,1912,Broke from Freud to found individual psychology, viewing dreams as tied to compensation for felt inferiority,3
+compensation_theory,Compensation Theory,Concept,1912,Adler's idea that dreams help the psyche work through feelings of inferiority,2
+hall,Calvin Hall,Theorist,1953,Developed the cognitive theory of dreams and a system for content-analyzing dream reports,3
+cognitive_theory,Cognitive Theory of Dreams,School,1953,Views dreams as reflections of a dreamer's everyday concerns and conceptions of self and others,3
+hobson_mccarley,Hobson and McCarley,Theorist,1977,Neuroscientists who proposed the activation-synthesis model, challenging Freudian dream theory,5
+activation_synthesis,Activation-Synthesis Model,Concept,1977,Theory that dreams arise from the brain synthesizing meaning from random brainstem activity during REM,4
+rem_sleep,REM Sleep,Concept,1953,Rapid Eye Movement sleep stage discovered to correlate strongly with vivid dreaming,4
+biological_school,Neurocognitive-Biological School,School,1977,Approach explaining dreams primarily through brain physiology rather than symbolic meaning,4
+revonsuo,Antti Revonsuo,Theorist,2000,Proposed the threat simulation theory as an evolutionary explanation for dreaming,3
+threat_simulation,Threat Simulation Theory,Concept,2000,Evolutionary theory that dreaming rehearses threat perception and avoidance for survival,3
+evolutionary_school,Evolutionary School,School,2000,Framework explaining dreaming as an adaptive trait shaped by natural selection,3
+memory_consolidation,Memory Consolidation Theory,Concept,2010,Theory that dreaming helps process and consolidate memories and learning from waking life,3
+domhoff,William Domhoff,Theorist,1996,Continued Hall's content-analysis approach and critiqued purely biological dream theories,3
+cartwright,Rosalind Cartwright,Theorist,1977,Researched dreams' role in emotional regulation and mood processing,3
+emotional_regulation,Emotional Regulation Theory,Concept,1977,Theory that dreaming helps process and regulate emotional experiences from waking life,2
+lucid_dreaming,Lucid Dreaming,Concept,1913,State of being aware one is dreaming while still asleep, studied scientifically since the 20th century,3
+laberge,Stephen LaBerge,Theorist,1980,Pioneered scientific research and induction techniques for lucid dreaming,3
+psychoanalytic_school,Psychoanalytic School,School,1899,Broad tradition treating dreams as windows into unconscious conflict and desire,5
+analytical_psychology,Analytical Psychology,School,1916,Jungian tradition treating dreams as sources of symbolic and archetypal meaning,4
+surrealism,Surrealist Art,Application,1924,Art movement led by Dali and Breton directly inspired by Freudian dream theory,4
+psychotherapy_practice,Modern Psychotherapy,Application,1900,Continued clinical use of dream interpretation in various forms of talk therapy,4
+film_dream_logic,Film and Dream Logic,Application,1945,Cinema's use of dream sequences and non-linear dream logic, from Hitchcock to Lynch,3
+pop_psychology,Pop Psychology and Dream Dictionaries,Application,1970,Popularized, often oversimplified dream symbol interpretation for mass audiences,2
+dream_journaling_apps,Dream Journaling Apps,Application,2015,Modern digital tools for recording and pattern-analyzing personal dreams,2
+sleep_science,Sleep Science and Neuroscience,Application,1953,Academic and clinical field studying sleep architecture and dream physiology,4

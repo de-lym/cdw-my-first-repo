@@ -5,27 +5,26 @@
   //    if the Firebase scripts can't load (e.g. blocked network,
   //    sandboxed preview, ad blocker).
   // ---------------------------------------------------------------
+  const tabWrite = document.getElementById("tab-write");
+  const tabAssemble = document.getElementById("tab-assemble");
+  const panelWrite = document.getElementById("panel-write");
+  const panelAssemble = document.getElementById("panel-assemble");
   const dreamWall = document.getElementById("dream-wall");
 
-  // { tabId, panelId, showWall, onOpen } for each tab -- write/assemble keep
-  // their original behavior exactly, chat is added the same way.
-  const TABS = [
-    { tab: "tab-write", panel: "panel-write", showWall: true },
-    { tab: "tab-assemble", panel: "panel-assemble", showWall: false, onOpen: generatePool },
-    { tab: "tab-chat", panel: "panel-chat", showWall: false, onOpen: () => document.getElementById("chat-input").focus() }
-  ];
-
-  TABS.forEach(({ tab, panel, showWall, onOpen }) => {
-    document.getElementById(tab).addEventListener("click", () => {
-      TABS.forEach(({ tab: t, panel: p }) => {
-        document.getElementById(t).classList.remove("active");
-        document.getElementById(p).classList.remove("active");
-      });
-      document.getElementById(tab).classList.add("active");
-      document.getElementById(panel).classList.add("active");
-      dreamWall.style.display = showWall ? "" : "none";
-      if (onOpen) onOpen();
-    });
+  tabWrite.addEventListener("click", () => {
+    tabWrite.classList.add("active");
+    tabAssemble.classList.remove("active");
+    panelWrite.classList.add("active");
+    panelAssemble.classList.remove("active");
+    dreamWall.style.display = "";
+  });
+  tabAssemble.addEventListener("click", () => {
+    tabAssemble.classList.add("active");
+    tabWrite.classList.remove("active");
+    panelAssemble.classList.add("active");
+    panelWrite.classList.remove("active");
+    dreamWall.style.display = "none";
+    generatePool(); // fresh set of words each time the composer is opened
   });
 
   let selectedMood = null;
@@ -515,123 +514,5 @@
       `;
     }).join("");
   }
-
-  // ---------------------------------------------------------------
-  // 3. TALK IT THROUGH -- the chat tab. UI wiring runs immediately like
-  //    the rest of the page. Sending a message calls sendToDreamGuide()
-  //    from chat-bot.js (loaded before this file), which talks to OpenAI
-  //    directly. If that script or the API key isn't set up yet, it
-  //    fails gracefully -- the conversation still shows on-screen and
-  //    can still be saved to the wall.
-  // ---------------------------------------------------------------
-  const chatMessagesEl = document.getElementById("chat-messages");
-  const chatInput = document.getElementById("chat-input");
-  const chatSendBtn = document.getElementById("chat-send");
-  const chatStatusEl = document.getElementById("status-chat");
-  const chatSaveBtn = document.getElementById("chat-save");
-
-  const GUIDE_OPENER = "Hi. There's no rush -- start anywhere. A color, a feeling, where you were... whatever comes back first.";
-
-  // Only role/content ever get sent to the Cloud Function -- the persona
-  // and behavior rules live server-side in functions/index.js, not here.
-  let chatHistory = []; // [{ role: "user" | "assistant", content }]
-  let chatBusy = false;
-
-  function renderChatMessages() {
-    if (chatHistory.length === 0) {
-      chatMessagesEl.innerHTML = `<p class="chat-empty">${escapeHtml(GUIDE_OPENER)}</p>`;
-      return;
-    }
-    chatMessagesEl.innerHTML = chatHistory.map(m => `
-      <div class="chat-msg ${m.role === "user" ? "user" : "guide"}">${escapeHtml(m.content)}</div>
-    `).join("");
-    chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
-  }
-
-  function setChatBusy(busy) {
-    chatBusy = busy;
-    chatSendBtn.disabled = busy;
-    chatInput.disabled = busy;
-  }
-
-  async function sendChatMessage() {
-    const text = chatInput.value.trim();
-    if (!text || chatBusy) return;
-
-    chatHistory.push({ role: "user", content: text });
-    chatInput.value = "";
-    chatInput.style.height = "auto";
-    renderChatMessages();
-    chatSaveBtn.disabled = false;
-
-    if (typeof sendToDreamGuide !== "function") {
-      chatStatusEl.textContent = "The dream guide script (chat-bot.js) isn't loaded -- your words are still kept below, and you can still save this to the wall.";
-      return;
-    }
-
-    setChatBusy(true);
-    chatStatusEl.textContent = "";
-    const typingEl = document.createElement("div");
-    typingEl.className = "chat-msg guide typing";
-    typingEl.textContent = "...";
-    chatMessagesEl.appendChild(typingEl);
-    chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
-
-    try {
-      const reply = await sendToDreamGuide(chatHistory);
-      chatHistory.push({ role: "assistant", content: reply });
-      renderChatMessages();
-    } catch (err) {
-      console.error("Dream guide chat failed:", err);
-      typingEl.remove();
-      chatStatusEl.textContent = err.message && err.message.includes("API key")
-        ? "The dream guide needs an OpenAI API key -- add yours to chat-bot.js."
-        : "Something went wrong reaching the dream guide. Please try again.";
-    } finally {
-      setChatBusy(false);
-      chatInput.focus();
-    }
-  }
-
-  chatSendBtn.addEventListener("click", sendChatMessage);
-  chatInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      sendChatMessage();
-    }
-  });
-  chatInput.addEventListener("input", () => {
-    chatInput.style.height = "auto";
-    chatInput.style.height = Math.min(chatInput.scrollHeight, 140) + "px";
-  });
-
-  chatSaveBtn.addEventListener("click", async () => {
-    const userLines = chatHistory.filter(m => m.role === "user").map(m => m.content);
-    if (userLines.length === 0) return;
-    const text = userLines.join(" ");
-
-    if (!dreamsRef) {
-      chatStatusEl.textContent = "Saved for this session -- connect Firebase above to add it to the shared wall.";
-      return;
-    }
-
-    chatStatusEl.textContent = "Saving...";
-    try {
-      await fsAddDoc(dreamsRef, {
-        type: "written",
-        title: "Dream (talked through)",
-        text,
-        mood: null,
-        createdAt: fsServerTimestamp()
-      });
-      chatStatusEl.textContent = "Dream saved. Thank you for sharing.";
-      chatSaveBtn.disabled = true;
-    } catch (err) {
-      console.error(err);
-      chatStatusEl.textContent = "Something went wrong. Please try again.";
-    }
-  });
-
-  renderChatMessages();
 
   initFirebase();

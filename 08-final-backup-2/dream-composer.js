@@ -284,6 +284,10 @@
   let dreamsRef = null;
   let fsAddDoc, fsServerTimestamp, fsQuery, fsOrderBy, fsLimit, fsOnSnapshot;
 
+  // set once initFirebase() succeeds -- callDreamGuide() below checks this
+  // and fails gracefully (same pattern as dreamsRef) if Functions didn't load.
+  let callDreamGuide = null;
+
   async function initFirebase() {
     try {
       const appMod = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
@@ -301,6 +305,18 @@
       dreamsRef = fsMod.collection(db, "dreams");
 
       startDreamWall();
+
+      // Cloud Functions -- powers the "talk it through" chat tab. This calls
+      // a Cloud Function (functions/index.js: `dreamGuideChat`), which is the
+      // only place the OpenAI API key lives. Kept in its own try/catch so a
+      // Functions outage doesn't take down Firestore saving/the wall.
+      try {
+        const fnMod = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-functions.js");
+        const functions = fnMod.getFunctions(app);
+        callDreamGuide = fnMod.httpsCallable(functions, "dreamGuideChat");
+      } catch (fnErr) {
+        console.error("Firebase Functions failed to load:", fnErr);
+      }
     } catch (err) {
       console.error("Firebase failed to load:", err);
       document.getElementById("feed").innerHTML =
@@ -518,11 +534,9 @@
 
   // ---------------------------------------------------------------
   // 3. TALK IT THROUGH -- the chat tab. UI wiring runs immediately like
-  //    the rest of the page. Sending a message calls sendToDreamGuide()
-  //    from chat-bot.js (loaded before this file), which talks to OpenAI
-  //    directly. If that script or the API key isn't set up yet, it
-  //    fails gracefully -- the conversation still shows on-screen and
-  //    can still be saved to the wall.
+  //    the rest of the page; every send just checks callDreamGuide and
+  //    fails gracefully (matching the dreamsRef pattern above) if
+  //    Firebase Functions hasn't loaded yet or is unavailable.
   // ---------------------------------------------------------------
   const chatMessagesEl = document.getElementById("chat-messages");
   const chatInput = document.getElementById("chat-input");
@@ -564,8 +578,8 @@
     renderChatMessages();
     chatSaveBtn.disabled = false;
 
-    if (typeof sendToDreamGuide !== "function") {
-      chatStatusEl.textContent = "The dream guide script (chat-bot.js) isn't loaded -- your words are still kept below, and you can still save this to the wall.";
+    if (!callDreamGuide) {
+      chatStatusEl.textContent = "The dream guide isn't connected right now -- your words are still kept below, and you can still save this to the wall.";
       return;
     }
 
@@ -578,15 +592,14 @@
     chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
 
     try {
-      const reply = await sendToDreamGuide(chatHistory);
+      const result = await callDreamGuide({ messages: chatHistory });
+      const reply = (result.data && result.data.reply) || "...";
       chatHistory.push({ role: "assistant", content: reply });
       renderChatMessages();
     } catch (err) {
       console.error("Dream guide chat failed:", err);
       typingEl.remove();
-      chatStatusEl.textContent = err.message && err.message.includes("API key")
-        ? "The dream guide needs an OpenAI API key -- add yours to chat-bot.js."
-        : "Something went wrong reaching the dream guide. Please try again.";
+      chatStatusEl.textContent = "Something went wrong reaching the dream guide. Please try again.";
     } finally {
       setChatBusy(false);
       chatInput.focus();
