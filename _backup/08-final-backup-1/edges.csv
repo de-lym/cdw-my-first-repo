@@ -1,0 +1,53 @@
+source,target,type,weight,description
+ancient_incubation,artemidorus,precedes,2,Temple dream practices preceded systematic interpretation manuals
+biblical_dreams,artemidorus,precedes,1,Divine-message dream traditions influenced later interpretive frameworks
+artemidorus,freud,precedes,2,Early interpretation manuals prefigured symbolic dream analysis
+aboriginal_dreamtime,jung,interprets,1,Parallels drawn between Dreamtime cosmology and collective unconscious concepts
+freud,wish_fulfillment,developed,3,Freud originated this theory as the core of his dream theory
+freud,manifest_latent,developed,3,Freud proposed this structural distinction for dream content
+freud,unconscious_mind,developed,3,Central concept underlying all of Freud's psychoanalytic theory
+freud,dream_work,developed,3,Freud described the mechanisms disguising latent dream content
+wish_fulfillment,unconscious_mind,developed,2,Wish fulfillment operates through unconscious desire
+manifest_latent,dream_work,developed,2,Dream-work is the process converting latent into manifest content
+freud,psychoanalytic_school,developed,3,Freud founded this school of thought
+freud,jung,influenced,3,Jung was Freud's close collaborator before their theoretical split
+jung,collective_unconscious,developed,3,Jung's foundational departure from Freudian personal unconscious
+jung,archetypes,developed,3,Jung identified archetypes as recurring dream and mythic figures
+jung,individuation,developed,2,Jung linked dream symbolism to the individuation process
+jung,analytical_psychology,developed,3,Jung founded this school after breaking from Freud
+jung,unconscious_mind,contested,2,Jung redefined the unconscious as collective rather than purely personal
+freud,adler,influenced,2,Adler was originally part of Freud's inner circle before his break
+adler,compensation_theory,developed,2,Adler proposed dreams compensate for felt inferiority
+adler,unconscious_mind,contested,1,Adler reframed unconscious motivation around social striving, not repression
+hall,cognitive_theory,developed,3,Hall founded the cognitive theory of dreams
+hall,domhoff,influenced,2,Domhoff extended Hall's content-analysis methodology
+cognitive_theory,domhoff,developed,2,Domhoff continued developing cognitive dream theory
+hobson_mccarley,activation_synthesis,developed,3,Hobson and McCarley proposed this neuroscience-based model
+hobson_mccarley,rem_sleep,developed,2,Their model was grounded in REM sleep neurophysiology
+hobson_mccarley,biological_school,developed,3,They helped found the neurocognitive-biological approach
+hobson_mccarley,freud,contested,3,Their model directly challenged Freudian symbolic dream theory
+hobson_mccarley,wish_fulfillment,contested,2,Activation-synthesis rejected wish fulfillment as the source of dream content
+rem_sleep,sleep_science,precedes,2,Discovery of REM sleep enabled the modern scientific study of dreaming
+revonsuo,threat_simulation,developed,3,Revonsuo proposed this evolutionary theory of dreaming
+revonsuo,evolutionary_school,developed,3,Revonsuo helped establish this school of dream theory
+threat_simulation,biological_school,influenced,1,Threat simulation theory builds on biological dream research
+threat_simulation,freud,contested,1,Offers a survival-based alternative to symbolic wish fulfillment
+memory_consolidation,rem_sleep,influenced,2,Memory consolidation theory draws on REM sleep research
+memory_consolidation,sleep_science,developed,2,This theory emerged from sleep science research
+cartwright,emotional_regulation,developed,2,Cartwright researched dreams' role in emotional processing
+cartwright,sleep_science,influenced,2,Cartwright's research contributed to clinical sleep science
+emotional_regulation,memory_consolidation,influenced,1,Both theories link dreaming to overnight cognitive-emotional processing
+laberge,lucid_dreaming,developed,3,LaBerge pioneered scientific study and induction of lucid dreaming
+lucid_dreaming,rem_sleep,precedes,1,Lucid dreaming research relies on REM sleep monitoring
+freud,surrealism,applied_to,3,Surrealist artists directly drew on Freudian dream theory
+jung,surrealism,applied_to,1,Archetypal imagery also influenced surrealist symbolism
+psychoanalytic_school,psychotherapy_practice,applied_to,3,Psychoanalytic dream interpretation shaped modern therapeutic practice
+analytical_psychology,psychotherapy_practice,applied_to,2,Jungian dream work remains used in contemporary therapy
+surrealism,film_dream_logic,influenced,2,Surrealist visual language shaped cinematic dream sequences
+freud,film_dream_logic,applied_to,1,Psychoanalytic dream logic influenced early cinematic dream depictions
+psychoanalytic_school,pop_psychology,applied_to,2,Simplified Freudian symbolism spread into popular dream dictionaries
+analytical_psychology,pop_psychology,applied_to,1,Jungian archetypes were popularized in mass-market dream interpretation
+cognitive_theory,dream_journaling_apps,applied_to,2,Content-analysis approaches inform modern dream tracking tools
+lucid_dreaming,dream_journaling_apps,applied_to,1,Dream journaling supports lucid dreaming practice and recall
+sleep_science,dream_journaling_apps,influenced,1,Sleep science findings inform app-based dream tracking features
+biological_school,sleep_science,developed,2,The biological school is grounded in ongoing sleep science research

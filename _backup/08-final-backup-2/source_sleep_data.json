@@ -1,0 +1,302 @@
+[
+  {
+    "flagCode": "NZ",
+    "country": "New Zealand",
+    "AverageTimeInBedMinutes_2015": 447,
+    "AverageBedtime_2015": "23:29"
+  },
+  {
+    "flagCode": "NL",
+    "country": "Netherlands",
+    "AverageTimeInBedMinutes_2015": 444,
+    "AverageBedtime_2015": "00:07"
+  },
+  {
+    "flagCode": "FI",
+    "country": "Finland",
+    "AverageTimeInBedMinutes_2015": 443,
+    "AverageBedtime_2015": "00:03"
+  },
+  {
+    "flagCode": "GB",
+    "country": "United Kingdom",
+    "AverageTimeInBedMinutes_2015": 442,
+    "AverageBedtime_2015": "00:28"
+  },
+  {
+    "flagCode": "AU",
+    "country": "Australia",
+    "AverageTimeInBedMinutes_2015": 440,
+    "AverageBedtime_2015": "23:33"
+  },
+  {
+    "flagCode": "BE",
+    "country": "Belgium",
+    "AverageTimeInBedMinutes_2015": 438,
+    "AverageBedtime_2015": "00:06"
+  },
+  {
+    "flagCode": "IE",
+    "country": "Ireland",
+    "AverageTimeInBedMinutes_2015": 437,
+    "AverageBedtime_2015": "00:16"
+  },
+  {
+    "flagCode": "SE",
+    "country": "Sweden",
+    "AverageTimeInBedMinutes_2015": 435,
+    "AverageBedtime_2015": "23:50"
+  },
+  {
+    "flagCode": "FR",
+    "country": "France",
+    "AverageTimeInBedMinutes_2015": 434,
+    "AverageBedtime_2015": "00:19"
+  },
+  {
+    "flagCode": "DK",
+    "country": "Denmark",
+    "AverageTimeInBedMinutes_2015": 434,
+    "AverageBedtime_2015": "23:47"
+  },
+  {
+    "flagCode": "CA",
+    "country": "Canada",
+    "AverageTimeInBedMinutes_2015": 431,
+    "AverageBedtime_2015": "23:57"
+  },
+  {
+    "flagCode": "NO",
+    "country": "Norway",
+    "AverageTimeInBedMinutes_2015": 429,
+    "AverageBedtime_2015": "00:16"
+  },
+  {
+    "flagCode": "CH",
+    "country": "Switzerland",
+    "AverageTimeInBedMinutes_2015": 428,
+    "AverageBedtime_2015": "00:19"
+  },
+  {
+    "flagCode": "DE",
+    "country": "Germany",
+    "AverageTimeInBedMinutes_2015": 427,
+    "AverageBedtime_2015": "23:59"
+  },
+  {
+    "flagCode": "AT",
+    "country": "Austria",
+    "AverageTimeInBedMinutes_2015": 427,
+    "AverageBedtime_2015": "23:55"
+  },
+  {
+    "flagCode": "US",
+    "country": "United States",
+    "AverageTimeInBedMinutes_2015": 426,
+    "AverageBedtime_2015": "23:54"
+  },
+  {
+    "flagCode": "ZA",
+    "country": "South Africa",
+    "AverageTimeInBedMinutes_2015": 424,
+    "AverageBedtime_2015": "00:20"
+  },
+  {
+    "flagCode": "HU",
+    "country": "Hungary",
+    "AverageTimeInBedMinutes_2015": 422,
+    "AverageBedtime_2015": "23:59"
+  },
+  {
+    "flagCode": "CZ",
+    "country": "Czechia",
+    "AverageTimeInBedMinutes_2015": 420,
+    "AverageBedtime_2015": "23:58"
+  },
+  {
+    "flagCode": "PT",
+    "country": "Portugal",
+    "AverageTimeInBedMinutes_2015": 419,
+    "AverageBedtime_2015": "00:41"
+  },
+  {
+    "flagCode": "RO",
+    "country": "Romania",
+    "AverageTimeInBedMinutes_2015": 418,
+    "AverageBedtime_2015": "23:09"
+  },
+  {
+    "flagCode": "SK",
+    "country": "Slovakia",
+    "AverageTimeInBedMinutes_2015": 417,
+    "AverageBedtime_2015": "01:03"
+  },
+  {
+    "flagCode": "ES",
+    "country": "Spain",
+    "AverageTimeInBedMinutes_2015": 416,
+    "AverageBedtime_2015": "00:32"
+  },
+  {
+    "flagCode": "IT",
+    "country": "Italy",
+    "AverageTimeInBedMinutes_2015": 414,
+    "AverageBedtime_2015": "00:35"
+  },
+  {
+    "flagCode": "GR",
+    "country": "Greece",
+    "AverageTimeInBedMinutes_2015": 414,
+    "AverageBedtime_2015": "01:05"
+  },
+  {
+    "flagCode": "UA",
+    "country": "Ukraine",
+    "AverageTimeInBedMinutes_2015": 412,
+    "AverageBedtime_2015": "00:03"
+  },
+  {
+    "flagCode": "PL",
+    "country": "Poland",
+    "AverageTimeInBedMinutes_2015": 410,
+    "AverageBedtime_2015": "00:55"
+  },
+  {
+    "flagCode": "RU",
+    "country": "Russia",
+    "AverageTimeInBedMinutes_2015": 405,
+    "AverageBedtime_2015": "01:05"
+  },
+  {
+    "flagCode": "AE",
+    "country": "United Arab Emirates",
+    "AverageTimeInBedMinutes_2015": 405,
+    "AverageBedtime_2015": "01:05"
+  },
+  {
+    "flagCode": "CN",
+    "country": "China",
+    "AverageTimeInBedMinutes_2015": 403,
+    "AverageBedtime_2015": "00:32"
+  },
+  {
+    "flagCode": "TH",
+    "country": "Thailand",
+    "AverageTimeInBedMinutes_2015": 402,
+    "AverageBedtime_2015": "00:22"
+  },
+  {
+    "flagCode": "BR",
+    "country": "Brazil",
+    "AverageTimeInBedMinutes_2015": 400,
+    "AverageBedtime_2015": "00:32"
+  },
+  {
+    "flagCode": "CL",
+    "country": "Chile",
+    "AverageTimeInBedMinutes_2015": 399,
+    "AverageBedtime_2015": "00:47"
+  },
+  {
+    "flagCode": "HK",
+    "country": "Hong Kong",
+    "AverageTimeInBedMinutes_2015": 399,
+    "AverageBedtime_2015": "00:55"
+  },
+  {
+    "flagCode": "CR",
+    "country": "Costa Rica",
+    "AverageTimeInBedMinutes_2015": 399,
+    "AverageBedtime_2015": "23:43"
+  },
+  {
+    "flagCode": "MX",
+    "country": "Mexico",
+    "AverageTimeInBedMinutes_2015": 397,
+    "AverageBedtime_2015": "00:20"
+  },
+  {
+    "flagCode": "CO",
+    "country": "Colombia",
+    "AverageTimeInBedMinutes_2015": 397,
+    "AverageBedtime_2015": "23:41"
+  },
+  {
+    "flagCode": "IL",
+    "country": "Israel",
+    "AverageTimeInBedMinutes_2015": 396,
+    "AverageBedtime_2015": "00:44"
+  },
+  {
+    "flagCode": "IN",
+    "country": "India",
+    "AverageTimeInBedMinutes_2015": 395,
+    "AverageBedtime_2015": "00:26"
+  },
+  {
+    "flagCode": "TR",
+    "country": "Turkey",
+    "AverageTimeInBedMinutes_2015": 395,
+    "AverageBedtime_2015": "00:59"
+  },
+  {
+    "flagCode": "SG",
+    "country": "Singapore",
+    "AverageTimeInBedMinutes_2015": 394,
+    "AverageBedtime_2015": "23:52"
+  },
+  {
+    "flagCode": "MY",
+    "country": "Malaysia",
+    "AverageTimeInBedMinutes_2015": 387,
+    "AverageBedtime_2015": "00:35"
+  },
+  {
+    "flagCode": "QA",
+    "country": "Qatar",
+    "AverageTimeInBedMinutes_2015": 386,
+    "AverageBedtime_2015": "00:06"
+  },
+  {
+    "flagCode": "ID",
+    "country": "Indonesia",
+    "AverageTimeInBedMinutes_2015": 385,
+    "AverageBedtime_2015": "00:10"
+  },
+  {
+    "flagCode": "TW",
+    "country": "Taiwan",
+    "AverageTimeInBedMinutes_2015": 381,
+    "AverageBedtime_2015": "00:37"
+  },
+  {
+    "flagCode": "KW",
+    "country": "Kuwait",
+    "AverageTimeInBedMinutes_2015": 375,
+    "AverageBedtime_2015": "00:14"
+  },
+  {
+    "flagCode": "PH",
+    "country": "Philippines",
+    "AverageTimeInBedMinutes_2015": 368,
+    "AverageBedtime_2015": "00:39"
+  },
+  {
+    "flagCode": "KR",
+    "country": "South Korea",
+    "AverageTimeInBedMinutes_2015": 362,
+    "AverageBedtime_2015": "00:16"
+  },
+  {
+    "flagCode": "SA",
+    "country": "Saudi Arabia",
+    "AverageTimeInBedMinutes_2015": 362,
+    "AverageBedtime_2015": "00:39"
+  },
+  {
+    "flagCode": "JP",
+    "country": "Japan",
+    "AverageTimeInBedMinutes_2015": 352,
+    "AverageBedtime_2015": "00:49"
+  }
+]
