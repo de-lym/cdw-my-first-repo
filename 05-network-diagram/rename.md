@@ -1,182 +1,137 @@
-# Aesthetic.md
+# A Relational Structure of Dream Theory
 
-# Dreamcore: Between Memory and Reality
+# Project Ideas
 
 ## Concept
 
-This website explores the feeling of being inside a dream rather than telling a linear story. It is inspired by the Dreamcore aesthetic, which combines nostalgia, liminal spaces, surreal imagery, and a quiet sense of uncertainty. Instead of presenting information directly, the website invites visitors to slowly explore an environment that feels familiar but impossible at the same time. Dreamcore often blurs the boundary between comfort and unease through dreamlike landscapes, soft colors, and fragmented memories. :contentReference[oaicite:0]{index=0}
+An interactive diagram that visualizes how dream theory was founded, contested, and carried into art, therapy, and science, from temple incubation to activation-synthesis.
 
-The goal is to create an experience where users feel as if they are wandering through forgotten memories instead of navigating a traditional website.
+## Object Direction
 
----
+The network functions as a historical reading interface where relationships are as important as individual entries. Rather than presenting dream theory as a linear timeline or collection of biographies, the object allows visitors to discover paths through changing ideas, influences, disciplines, and disagreements.
 
-# Visual Language
+## Spatial Experience
 
-## Color Palette
+A large network occupies the main stage as a spatial field rather than a fixed diagram. Nodes represent people, theories, disciplines, and historical positions, while connections reveal different types of relationships between them.
 
-The palette is soft and slightly faded to resemble old photographs and dream memories.
+A header provides the title, category legend, connection legend, and interaction hint. A contextual card provides additional information when a node is selected.
 
-- Pale blue
-- Soft lavender
-- Warm cream
-- Light pink
-- Fog gray
-- Muted yellow
+## Interaction
 
-Bright colors are used sparingly to create moments that feel almost unreal, similar to sudden vivid details remembered from dreams. :contentReference[oaicite:1]{index=1}
+Visitors can drag nodes, pan the canvas, zoom or pinch, focus on individual entries, and hover to reveal descriptions. Double-clicking resets the diagram.
 
----
+The interaction allows visitors to move between individual historical entries and the larger structure that connects them.
 
-## Typography
+# Digital Objects
 
-Typography should feel simple and familiar.
+## Digital Object
 
-- Sans-serif fonts for readability
-- Bubble-like bold fonts for the main page to emphasize the aesthetics of dreamcore
-- Large headings with generous spacing
-- Small body text
-- Occasional lowercase titles
-- Plenty of whitespace
+The digital object is a relational map of people, theories, disciplines, and historical positions.
 
-Rather than dramatic typography, the atmosphere comes from spacing and composition.
+Different connection types describe relationships such as developed/applied/influenced, precedes, interprets, and contested. These relationships form the primary material of the visualization.
 
----
+## Historical Structure
 
-# Layout
+The network traces changing approaches to dreaming across different periods and disciplines. Rather than treating the history as a single progression, it exposes overlaps, continuities, conflicts, and transfers between religious practice, philosophy, psychology, art, therapy, and science.
 
-The layout is minimal and spacious.
+## Data and Content
 
-Adopted by the main page of Hayden Clay's portfolio website, bubbles with letters are placed with with generous negative space.
-Little web browser with further information will pop up as user clicks each bubbles.
-Navigation remains simple while allowing the content to become the primary visual focus.
+The primary content consists of nodes representing historical figures, theories, disciplines, and positions, together with edges describing their relationships.
 
----
+Nodes and edges are kept as separate CSV datasets so that the historical structure remains data-driven and can be revised independently of the visual system.
 
-# Motion
+Descriptions provide contextual information for individual nodes without requiring the visitor to leave the network.
 
-Animation is subtle.
+## Technical Character
 
-Examples include:
+D3.js supplies the force-directed layout, SVG rendering, legends, node and edge interaction, focus states, and contextual card.
 
-- slow moving of the clouds on the background
-- gentle opacity transitions
-- floating movement
-- little delay on appearance of web browser
-- smooth transition
+The force system determines the spatial arrangement of the network, making relationships computationally visible rather than treating the diagram as a static illustration.
 
-Movement should resemble drifting through a dream instead of interacting with a conventional interface.
+# Aesthetic
 
----
+## Visual Language
 
-# Interaction
+The visual language is intentionally analytical and restrained so that the network structure, labels, and relationships remain primary.
 
-The website encourages quiet exploration.
+The object should feel closer to a research diagram or historical map than to a conventional infographic, while retaining enough visual softness to remain connected to the Dream Archive.
 
-Interactions include:
+### Color Palette
 
-- hover effects that highlights selected bubbles
-- smooth transitions between sections
-- background animation
-- large clickable buttons
-- minimal buttons
+A light analytical field provides the foundation for the network. Node colors distinguish categories, while line styles distinguish types of relationships.
 
-Navigation should feel natural and almost invisible.
+The restrained palette keeps the structure legible and prevents color from becoming more important than the relationships it represents.
 
----
+### Typography
 
-# Atmosphere
+The diagram uses compact editorial and interface typography. Category labels, connection labels, node names, and the contextual card create a layered reading hierarchy.
 
-The emotional tone combines:
+Typography should remain small and information-oriented without making the network feel like a dense academic chart.
 
-- nostalgia
-- curiosity
-- loneliness
-- comfort
-- wonder
-- uncertainty
+## Layout
 
-Rather than providing clear answers, the website encourages visitors to interpret the experience for themselves.
+The network occupies the main visual field as a large force-directed SVG.
 
----
+The header contains the title, category legend, connection legend, and interaction hint. A contextual card appears near the selected or hovered node to provide additional information without permanently occupying the network space.
 
-# Website Components
+## Motion
 
-## HTML
+Nodes and links are positioned through a force-based spatial system. Motion should emerge primarily from the network itself and from visitor manipulation.
 
-The website is intentionally minimal, with the entire homepage functioning as an interactive dream landscape rather than a traditional navigation menu.
+Focused states, node movement, and transitions provide feedback without introducing ornamental animation.
 
-The HTML consists of:
+## Atmosphere
 
-- A full-screen animated sky containing multiple drifting clouds.
-- A translucent liminal pool that spans the bottom of the page, suggesting an endless reflective space.
-- VHS scanline and grain overlay layers that recreate the appearance of an old videotape.
-- Eight floating bubble buttons positioned freely across the screen. Each bubble represents a different page or fragment of the archive rather than a conventional navigation item.
-- A popup layer where content windows are dynamically generated when users interact with the bubbles.
+The object should feel exploratory, investigative, and slightly open-ended. Visitors should feel that they are discovering a history rather than being presented with a fixed interpretation of it.
 
-Instead of dividing the website into multiple visible pages, the homepage acts as a single dream environment where information appears as movable windows.
+The network should encourage lingering, tracing connections, and noticing unexpected relationships.
 
----
+## Website Components
 
-## CSS
+### HTML
 
-The visual design recreates the atmosphere of Dreamcore through subtle animation and layered effects rather than complex graphics.
+The HTML establishes the network as a self-contained historical visualization with a clear title, introductory context, legends, interaction guidance, network surface, and contextual information area.
 
-Key styling features include:
+The structure should make the purpose of the network understandable without requiring extensive explanation before interaction begins.
 
-- A vertical pastel gradient background transitioning from blue to lavender and peach to resemble an early evening sky.
-- Continuously drifting procedural clouds that slowly move across the screen, reinforcing the feeling of time passing.
-- A translucent "liminal pool" at the bottom of the viewport with gentle shimmering animation.
-- VHS-inspired scanlines and animated film grain overlays that simulate nostalgic analog media.
-- Floating translucent bubbles created with gradients, blur, reflections, and soft shadows to resemble soap bubbles suspended in the air.
-- Glassmorphism-inspired popup windows with blurred backgrounds, semi-transparent surfaces, and soft shadows.
-- Responsive layouts that reposition the floating bubbles on smaller screens while preserving the overall composition.
+### CSS
 
-Typography combines playful and technical aesthetics:
+The HTML establishes the network as a self-contained historical visualization with a clear title, introductory context, legends, interaction guidance, network surface, and contextual information area.
 
-- **Bagel Fat One** is used for the floating bubble letters, giving them a childlike and dreamlike personality.
-- **Space Mono** is used for window titles and interface elements, evoking old computer systems.
-- **IBM Plex Mono** is used for the body text, reinforcing the feeling of reading archived digital documents.
+The structure should make the purpose of the network understandable without requiring extensive explanation before interaction begins.
 
-The overall color palette consists of faded blues, lavenders, warm peach tones, and translucent whites that create a calm yet uncanny atmosphere.
+### JavaScript
 
----
+The CSS establishes the light analytical field, typography, legends, node and connection styling, contextual card, and responsive behavior.
 
-## JavaScript
-
-JavaScript transforms the homepage into an interactive dream archive rather than a static website.
-
-Its primary functions include:
-
-- Opening unique popup windows when each floating bubble is clicked.
-- Dynamically generating each window from predefined content stored as JavaScript objects instead of separate HTML pages.
-- Creating draggable windows that users can freely move around the screen, mimicking an old desktop operating system.
-- Managing window focus through z-index so the active window always appears above the others.
-- Animating windows as they open and close to preserve a smooth, dreamlike interaction.
-- Triggering an interactive "dream mode" where pressing the **Enter the Pool** button changes the atmosphere and reveals randomly selected surreal messages such as memories, announcements, or impossible observations.
-- Using randomness so each interaction can produce a different fragment of text, making the experience feel unpredictable and dream-like.
-
-Rather than providing linear navigation, JavaScript allows visitors to construct their own path through scattered memories and fragmented stories.
-
-- Section switching
-- Active navigation state
-- Smooth transitions
-- Default landing section
-- Interactive media controls
-
----
+The interface should prioritize the network itself and avoid unnecessary controls or decorative elements.
 
 # Design Principles
 
-- Less information, more atmosphere.
-- Empty space is as important as content.
-- Navigation should disappear into the experience.
-- Every interaction should feel calm and slow.
-- The website should feel like exploring a memory instead of reading a webpage.
+## Relationships Over Lists
 
----
+The network should communicate history through relationships rather than presenting people and theories as isolated entries. The connections are as important as the nodes themselves.
 
-# References
+## Nonlinear History
 
-- Dreamcore Aesthetic Wiki
-- Hayden Clay Portfolio
-- Dreamcore visual essays and ambient YouTube videos
+Avoid forcing dream theory into a single linear progression. The structure should allow visitors to discover multiple paths through influence, conflict, interpretation, application, and historical sequence.
+
+## Data as Structure
+
+Treat the historical dataset as the foundation of the visual system. The network should emerge from the relationships encoded in the data rather than being manually arranged as a decorative diagram.
+
+## Direct Exploration
+
+Let visitors discover the historical structure through dragging, zooming, hovering, and tracing connections. Interaction should reveal complexity gradually rather than presenting every detail at once.
+
+## Context Without Interruption
+
+Provide enough information to understand individual nodes while keeping the visitor within the network. Contextual descriptions should support exploration rather than interrupt it.
+
+## Computational Character
+
+The force-directed system should remain part of the meaning of the object. The movement and spatial relationships of the nodes should make the structure of dream theory perceptible rather than simply illustrating it.
+
+## Archive Cohesion
+
+The network should remain recognizable as part of the Dream Archive while maintaining its own analytical identity. Its restrained visual language can contrast with more atmospheric objects without breaking the larger archive experience.
