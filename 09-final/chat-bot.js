@@ -1,21 +1,11 @@
 // ---------------------------------------------------------------
-// chat-bot.js -- talks to OpenAI directly from the browser for the
-// "talk it through" dream guide tab.
-//
-// Replace OPENAI_API_KEY below with your own key from
-// platform.openai.com -> Settings -> API keys.
-//
-// NOTE ON SECURITY: because this runs client-side, anyone who views this
-// file (or your page source) can see this key and use it against your
-// balance. That's an accepted tradeoff for a class project on a capped
-// $5 key -- just don't reuse this key anywhere that matters, and consider
-// regenerating/deleting it once the assignment is graded.
+// chat-bot.js 
+// talks to OpenAI directly from the browser for the "talk it through" dream guide tab.
 // ---------------------------------------------------------------
 
 const OPENAI_API_KEY = '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';
 
-// The dream guide's persona and behavior rules. Kept here, in one place,
-// rather than scattered through dream-composer.js.
+// The dream guide's persona and behavior rules.
 const DREAM_GUIDE_SYSTEM_PROMPT = `
 You are the "dream guide" inside a small web art project called Dream Archive.
 Visitors come here to describe a dream they had, but sometimes they're not

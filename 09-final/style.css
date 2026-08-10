@@ -445,11 +445,7 @@ body {
   overflow-y: auto;
 }
 
-/* ── build-your-dream embed ──
-   dream-composer.html is a full standalone page with its own fonts, colors, and
-   drag-to-compose logic, loaded here in an iframe so none of that collides with
-   the host page. It cancels window-body's 20px padding to sit edge-to-edge,
-   reading as a small nested browser rather than a padded content block. */
+/* ── build-your-dream embed ─- */
 .dream-embed {
   margin: -20px;
   width: calc(100% + 40px);
@@ -791,8 +787,6 @@ body.dream-mode .liminal-pool {
 }
 
 /* ── canvas: force-layout nodes/links live inside this svg ── */
-/* scoped to the stage's direct-child svg only, so it doesn't also stretch
-   the small line-swatch <svg> icons nested inside the legend below */
 .network-diagram .nd-stage > svg{ 
   width:100%;
   height:100%; 

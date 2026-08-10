@@ -56,11 +56,6 @@ const letterContent = {
   },
 
   // Build Your Dream — the word-composer / dream archive project, behind the 'p' bubble.
-  // It's a full standalone page (own fonts, its own :root color variables like --ink and
-  // --sky-top which collide by name with this site's, its own #goo SVG filter, its own
-  // Firebase wiring). Rather than merge that CSS/JS into the host page and risk those
-  // collisions, it's loaded in an iframe — dream-composer.html/.css/.js, served alongside
-  // index.html — so it stays fully sandboxed and behaves exactly as it does standalone.
   m: {
     title: 'build-your-dream.html',
     html: `
@@ -93,10 +88,6 @@ const letterContent = {
   },
 
   // Dream Theory network diagram (D3.js, force layout + 3D-ish rotation) — content behind the 'g' bubble.
-  // Everything the diagram needs — its own color variables, its own layout rules — lives inside
-  // ".network-diagram" below, so it can't be affected by (or accidentally affect) the rest of the
-  // site's stylesheet. That's also what makes the white background easy: these CSS variables are
-  // scoped to this popup only, so flipping them here doesn't touch anything else on the page.
   n: {
     title: 'actor network diagram.txt',
     html: `
@@ -139,14 +130,6 @@ const letterContent = {
   },
 
   // Nightfall sleep map (Mapbox GL) — content behind the last 'e' bubble.
-  // Same isolation strategy as the 'g' network diagram: everything the map
-  // needs — its own color variables, its own layout rules — lives inside
-  // ".nightfall-embed" in the stylesheet, so it can't be affected by (or
-  // accidentally affect) the rest of the site. That scoping is also what
-  // makes it easy to force this one popup's background to white while
-  // leaving the rest of the page untouched, and to keep Nightfall's own
-  // accent color codes as-is even though the neutrals had to flip for
-  // contrast on white. initNightfallMap() in this file fills in the map.
   g: {
     title: 'nightfall.map',
     html: `
@@ -179,45 +162,18 @@ const letterContent = {
       </div>
     `,
   },
-
-  // Gallery — parked for now, not wired to a bubble. To bring it back:
-  // 1. pick a free key below (e.g. 'e3') and uncomment this block under that key
-  // 2. add a new <button class="bubble" data-letter="e3" ...> in index.html
-  // 3. optionally give it its own entry in DEFAULT_SIZES below (it'll
-  //    otherwise fall back to DEFAULT: 360x320, which is what it was sized for)
-  //
-  // e3: {
-  //   title: 'gallery.jpg',
-  //   html: `
-  //     <p class="window-label">gallery</p>
-  //       <div class="gallery-grid">
-  //         <div class="gallery-item">memory lane</div>
-  //         <div class="gallery-item">strange clouds</div>
-  //         <div class="gallery-item">private pool</div>
-  //         <div class="gallery-item">tree-lined street</div>
-  //       </div>
-  //   `,
-  // },
 };
 
 // default popup footprint per content key — canvas popups start larger
 const DEFAULT_SIZES = {
-  e: { width: 420, height: 640 },
-  a: { width: 420, height: 640 },
+  e: { width: 480, height: 640 },
+  a: { width: 480, height: 640 },
   g: { width: 870, height: 640 },
-  g: { width: 760, height: 640 },
-  m: { width: 480, height: 680 },
-  DEFAULT: { width: 360, height: 320 },
+  n: { width: 870, height: 640 },
+  m: { width: 560, height: 680 },
+  i: { width: 870, height: 640 },
+  DEFAULT: { width: 420, height: 320 },
 };
-
-// lines shown by the pool.exe demo when its button is pressed
-// const dreamMessages = [
-//   "the pool remembers what you forgot.",
-//   "you've been here before.",
-//   "still water, static sky.",
-//   "float a little longer.",
-//   "the surface hasn't decided what it is yet.",
-// ];
 
 // variables to manage popup windows
 let popupCount = 0;
@@ -418,8 +374,7 @@ function initP5Static(container) {
   });
 }
 
-// study 02 — slow drifting particles that respond to clicks:
-// a click sends nearby particles scattering, sparks a small burst
+// study 02 — slow drifting particles that respond to clicks
 function initP5Animated(container) {
   new p5(function (p) {
     let particles = [];
@@ -639,11 +594,7 @@ function initThreeOrbit(container) {
   };
 }
 
-// study 02 — material, lighting & fog study.
-// A lit sphere orbited by a ring of glowing satellites under a dramatic
-// spotlight (with shadows) and a cool rim light. Move the pointer to swing
-// the spotlight, click a satellite (or the sphere) to make it pulse and
-// throw its color into the scene's point light.
+// study 02 — material, lighting & fog study to create a moody atmosphere with orbiting satellites
 function initThreeAtmosphere(container) {
   const scene = new THREE.Scene();
   scene.background = new THREE.Color('#12101f');
@@ -670,9 +621,7 @@ function initThreeAtmosphere(container) {
   controls.minDistance = 3.5;
   controls.maxDistance = 11;
 
-  // ── dramatic lighting: dim ambient fill, a cool rim light from behind,
-  //    a hard-edged spotlight that casts shadows, and a warm point light
-  //    that reacts to clicks ──
+  // ── dramatic lighting that reacts to clicks ──
   scene.add(new THREE.AmbientLight(0x8b6fa8, 0.16));
 
   // directional rim light from behind the scene, giving a subtle glow to the edges of objects
@@ -900,10 +849,7 @@ function initThreeAtmosphere(container) {
 // initializes the DREAM sleep-trajectory chart inside the 'o' (data-chart) popup
 function initDreamChart(popup) {
   // dream_trajectories.js
-  // DREAM archive sleep-trajectory chart — loads raw session records from CSV via d3.csv,
-  // derives one trajectory per (Set ID, Subject ID) session, then draws + wires up interaction.
-  // requires D3 v7 (loaded in HTML) and #chart svg / #tip elements to be present in the DOM
-  
+  // DREAM archive sleep-trajectory chart — loads raw session records from CSV via d3.csv
   const CSV_PATH = "Data_records.csv";
   
   // "Last sleep stage" strings -> depth index used by the y-scale / stageNames below
@@ -914,9 +860,7 @@ function initDreamChart(popup) {
     return h * 3600 + m * 60 + s;
   }
   
-  // Groups raw CSV rows into one trajectory per session (Set ID + Subject ID),
-  // dropping individual readings with an unusable stage or missing awakening time,
-  // and keeping only sessions left with 2+ readings to actually draw a line.
+  // Groups raw CSV rows into one trajectory per session (Set ID + Subject ID)
   function buildData(rows) {
     const groups = d3.group(rows, d => `${d["Set ID"]}_${d["Subject ID"]}`);
     const sessions = [];
@@ -982,8 +926,7 @@ function initDreamChart(popup) {
     feMerge.append("feMergeNode").attr("in","blur");
     feMerge.append("feMergeNode").attr("in","SourceGraphic");
   
-    // each session gets its own horizontal gradient, stopping at every stage reading's color,
-    // so a hovered line can trace its depth journey left to right
+    // each session gets its own horizontal gradient, stopping at every stage reading's color
     function gradId(id){ return "grad-" + id.replace(/[^a-zA-Z0-9_-]/g, "_"); }
   
     // deepest stage reached in a session stands in for its "resting" color
@@ -1139,38 +1082,6 @@ function initDreamChart(popup) {
 
 /* ────────────────────────────────────────────────────────────
    Dream Theory network diagram (D3.js) — content behind the 'g' bubble
-
-   High-level trajectory of this function, top to bottom:
-     1. data      — the nodes (theorists/concepts/schools/etc.) and edges
-                     (how they relate) as two little CSV tables.
-     2. layout    — a physics simulation (d3-force) runs 500 ticks *once*,
-                     up front, to settle every node into a good x/y/z spot.
-                     That layout is then frozen (x0, y0, z0) — nothing keeps
-                     simulating while you interact with it.
-     3. draw      — one <g class="node-box"> per node, one <path class="link">
-                     per edge, plus a per-category legend built from the
-                     same color table used to fill the boxes.
-     4. camera    — dragging a label doesn't move that node, it spins the
-                     *whole frozen layout* around its center (a fake 3D
-                     rotation), and scroll/drag-canvas do an ordinary D3
-                     zoom/pan. render() re-projects every node/link from
-                     its frozen 3D position into current 2D screen space
-                     any time the camera changes.
-     5. interact  — hovering a box highlights it and its direct connections
-                     and shows the floating description card; clicking one
-                     flies the camera to center on it.
-     6. resize    — a ResizeObserver watches this popup's body so the
-                     diagram re-centers itself whenever the window is
-                     dragged to a new size (instead of only listening to
-                     the browser window, which wouldn't fire for that).
-
-   Everything below is scoped to `popup` — every DOM query goes through
-   `popup.querySelector(...)` / `d3.select(popup).select(...)` rather than
-   the bare document, and every id that gets referenced via `url(#id)`
-   (SVG markers + gradients, which — unlike querySelector — are NOT
-   automatically scoped to a subtree) is namespaced with a random `uid`.
-   That's what lets more than one of these popups be open at once without
-   them fighting over the same ids.
    ──────────────────────────────────────────────────────────── */
 function initNetworkDiagram(popup) {
 
@@ -1178,11 +1089,7 @@ function initNetworkDiagram(popup) {
   // ids never collide with another 'g' popup open at the same time
   const uid = 'nd' + Math.random().toString(36).slice(2, 9);
 
-  /* ---- 1. data: load nodes.csv / edges.csv from disk with d3.csv. Fetching
-     local files needs the page served over http(s) -- see the catch below
-     for what happens if it's opened directly as a file:// URL instead.
-     Everything that actually builds the diagram happens in
-     buildNetworkDiagram() below, only once both files have arrived. ---- */
+  /* ---- 1. data: load nodes.csv / edges.csv from disk with d3.csv. ---- */
   Promise.all([
     d3.csv("nodes.csv"),
     d3.csv("edges.csv")
@@ -1207,9 +1114,7 @@ function buildNetworkDiagram(popup, uid, nodes, links) {
   nodes.forEach(d => d.importance = +d.importance);
   links.forEach(d => d.weight = +d.weight);
 
-  /* ---- fill color per category, and which ink (light/dark) reads
-     cleanly on top of each fill — independent of the page's own
-     light/dark theme, since these are box colors, not backgrounds ---- */
+  /* ---- fill color per category ---- */
   const colorHex = {
     "Theorist": "#8b58e4",
     "Concept": "#bfb0e8",
@@ -1225,9 +1130,7 @@ function buildNetworkDiagram(popup, uid, nodes, links) {
     "Cultural-Historical": "#f2ede4"
   };
 
-  /* ---- scoped element references: every lookup goes through `popup`
-     (or a selection rooted at it) so this instance never touches another
-     popup's DOM, even if several 'g' windows are open at once ---- */
+  /* ---- scoped element references: every lookup goes through `popup` ---- */
   const svg = d3.select(popup).select("svg");
   const bodyEl = popup.querySelector(".window-body");
   const headerEl = popup.querySelector(".network-diagram header");
@@ -1237,8 +1140,6 @@ function buildNetworkDiagram(popup, uid, nodes, links) {
   const defs = svg.append("defs");
 
   // three arrowheads: neutral (default links), contested (red links), active (hover).
-  // Marker ids are IDREFs (`url(#id)`), which — unlike querySelector — resolve against
-  // the *whole document*, so they're namespaced with `uid` to stay instance-safe.
   function makeArrow(id, fillColor) {
     const m = defs.append("marker")
       .attr("id", id)
@@ -1257,8 +1158,7 @@ function buildNetworkDiagram(popup, uid, nodes, links) {
   }
   makeArrow(`arrow-default-${uid}`, "#8988a8");
   makeArrow(`arrow-contested-${uid}`, "#a06868");
-  // on the light background the old cream hover color would vanish, so the
-  // "active" arrow uses the dark ink color instead for visibility
+  // on the light background the old cream hover color would vanish
   makeArrow(`arrow-active-${uid}`, "#241f33");
   function markerForType(type) {
     return type === "contested" ? `url(#arrow-contested-${uid})` : `url(#arrow-default-${uid})`;
@@ -1268,7 +1168,6 @@ function buildNetworkDiagram(popup, uid, nodes, links) {
   const scene = zoomLayer.append("g");
 
   // an invisible full-canvas rect that exists purely to catch background drags/zooms
-  // (so panning the empty canvas is a distinct gesture from dragging a node label)
   const bgRect = scene.append("rect")
     .attr("id", "bgrect")
     .attr("x", -20000).attr("y", -20000)
@@ -1282,8 +1181,7 @@ function buildNetworkDiagram(popup, uid, nodes, links) {
   svg.call(zoom);
   svg.on("dblclick.zoom", null); // free up double-click for our own "reset view" instead
 
-  /* ---- 2. layout: measure each label, then run a physics simulation
-     once, up front, and freeze the result ---- */
+  /* ---- 2. layout: measure each label, then run a physics simulation ---- */
   const measureCanvas = document.createElement("canvas");
   const measureCtx = measureCanvas.getContext("2d");
   function textWidth(text, font) { measureCtx.font = font; return measureCtx.measureText(text).width; }
@@ -1299,8 +1197,7 @@ function buildNetworkDiagram(popup, uid, nodes, links) {
     .force("center", d3.forceCenter(0, 0))
     .force("collision", d3.forceCollide().radius(collideRadius))
     .stop();
-  // run the simulation to completion synchronously instead of animating it —
-  // we only want the *settled* layout, not the process of settling
+  // run the simulation to completion synchronously instead of animating it
   for (let i = 0; i < 500; i++) simulation.tick();
   // freeze the settled x/y as (x0, y0); this is the "real" position the camera rotates around
   nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
@@ -1324,8 +1221,7 @@ function buildNetworkDiagram(popup, uid, nodes, links) {
     .join("path")
     .attr("class", d => "link link-" + d.type);
 
-  // one gradient per link (source-category color -> target-category color), used only
-  // while that link is the hovered/active one; endpoints are kept in sync every render()
+  // one gradient per link (source-category color -> target-category color)
   const linkGrad = defs.selectAll(".link-gradient").data(links).join("linearGradient")
     .attr("class", "link-gradient")
     .attr("id", (d, i) => `grad-link-${uid}-${i}`)
@@ -1362,11 +1258,7 @@ function buildNetworkDiagram(popup, uid, nodes, links) {
     .attr("fill", d => textOnColor[d.category])
     .text(d => d.label);
 
-  /* ---- 4. camera: yaw/pitch rotation of the frozen 3D layout, plus pan/zoom ----
-     Grabbing a box and dragging it doesn't move that node — it spins the whole
-     structure around its center, using the drag's dx/dy as a turntable control.
-     Dragging empty canvas instead pans (see `zoom` above), keeping the two
-     gestures clearly separate. */
+  /* ---- 4. camera: yaw/pitch rotation of the frozen 3D layout, plus pan/zoom ---- */
   let rotY = 0, rotX = 0;   // yaw / pitch, radians
   let panX = 0, panY = 0;
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -1387,8 +1279,7 @@ function buildNetworkDiagram(popup, uid, nodes, links) {
     render();
   }
 
-  // rotates one node's frozen (x0,y0,z0) by the current yaw/pitch, returning
-  // its rotated 2D position plus a perspective scale factor
+  // rotates one node's frozen (x0,y0,z0) by the current yaw/pitch, returning its rotated 2D position plus a perspective scale factor
   function project(d) {
     const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
     const x1 = d.x0 * cosY + d.z0 * sinY;
@@ -1400,8 +1291,7 @@ function buildNetworkDiagram(popup, uid, nodes, links) {
     return { x2: x1, y2, z2, persp };
   }
 
-  // re-projects every node + link into current screen space; called after any
-  // camera change (rotate / pan / zoom / resize)
+  // re-projects every node + link into current screen space; called after any camera change (rotate / pan / zoom / resize)
   function render() {
     const cx = width / 2, cy = headerH + (height - headerH) / 2;
 
@@ -1425,14 +1315,13 @@ function buildNetworkDiagram(popup, uid, nodes, links) {
       .each(edgePositions)
       .style("opacity", d => d.type === "contested" ? null : 0.6 * depthOpacity((d.source.z2 + d.target.z2) / 2));
   }
-  // depth only ever dims mildly -- never enough to lose legibility
+  // depth only ever dims mildly
   function depthOpacity(z) {
     const t = clamp((z + maxR) / (2 * maxR), 0, 1);
     return 0.55 + t * 0.45;
   }
 
-  // point on a rectangle's edge, from its center, along the direction toward (px,py) —
-  // this is what makes links stop at a box's border instead of running into its middle
+  // point on a rectangle's edge, from its center, along the direction toward (px,py)
   function boxEdgePoint(d, px, py) {
     const dx = px - d.sx, dy = py - d.sy;
     const hw = (d.scaledW || d.boxW) / 2, hh = (d.scaledH || d.boxH) / 2;
@@ -1441,17 +1330,13 @@ function buildNetworkDiagram(popup, uid, nodes, links) {
     return { x: d.sx + dx * scale, y: d.sy + dy * scale };
   }
 
-  // deterministic bow amount per link -- spreads edges that would otherwise sit
-  // right on top of each other (e.g. several links radiating from the same box
-  // toward similar directions) into visibly separate curves
+  // deterministic bow amount per link
   function bowFor(i) {
     const slot = i % 7;                 // 0..6, stable per link
     return (slot - 3) * 9;              // -27 .. +27 px
   }
 
-  // draws one link as a slightly curved path (so parallel/converging links
-  // don't visually merge), and swaps in the gradient + bright arrowhead
-  // whenever this link touches the currently-hovered node
+  // draws one link as a slightly curved path and swaps in the gradient + bright arrowhead whenever link touches the currently-hovered node
   let hoveredId = null;
   function edgePositions(d, i) {
     const srcP = boxEdgePoint(d.source, d.target.sx, d.target.sy);
@@ -1551,13 +1436,7 @@ function buildNetworkDiagram(popup, uid, nodes, links) {
     cursorCard.classList.add("visible");
   }
   function positionCard(event) {
-    // .popup-window has a CSS `transform` on it (for its open/close scale
-    // animation), which makes it the containing block for any
-    // position:fixed descendant -- including this card. So "fixed" here
-    // is actually relative to the popup's own box, not the real browser
-    // viewport. Measure against the popup's own rect instead of
-    // window.innerWidth/innerHeight, or the card ends up placed as if the
-    // popup were full-screen and can land outside its visible bounds.
+    // .popup-window has a CSS `transform` on it
     const popupRect = popup.getBoundingClientRect();
     const cardW = cursorCard.offsetWidth, cardH = cursorCard.offsetHeight;
     let x = event.clientX - popupRect.left + 10;
@@ -1569,10 +1448,7 @@ function buildNetworkDiagram(popup, uid, nodes, links) {
   }
   function hideCard() { cursorCard.classList.remove("visible"); }
 
-  /* ---- 6. resize: this popup can be dragged/resized by the user, and the
-     browser window can change too — a ResizeObserver on the popup's body
-     catches both, unlike a plain `window.addEventListener("resize", ...)`
-     which would miss the popup being resized while the window stays put ---- */
+  /* ---- 6. resize: this popup can be dragged/resized by the user, and the browser window can change too ---- */
   const ro = new ResizeObserver(() => {
     width = bodyEl.clientWidth; height = bodyEl.clientHeight;
     headerH = headerEl.offsetHeight;
@@ -1581,19 +1457,12 @@ function buildNetworkDiagram(popup, uid, nodes, links) {
   ro.observe(bodyEl);
 
   // lets attachDynamicCanvases' close-button handler tear this instance down
-  // cleanly (stop observing) instead of leaking an observer per popup opened
   popup._canvasCleanup = function () {
     ro.disconnect();
   };
 }
 
-// Nightfall sleep map (Mapbox GL) — adapted from the standalone sleep_map.js
-// so it can run inside a popup instance instead of a full page: the map
-// mounts into this popup's own #sleep-map element (not a page-wide id, so
-// multiple popups never collide), a light basemap replaces the original
-// dark one to match the forced-white popup background, and a
-// ResizeObserver keeps the map sized correctly as the popup is dragged or
-// resized — the same job the 'g' network diagram's own observer does.
+// Nightfall sleep map (Mapbox GL
 const NIGHTFALL_TOKEN = 'pk.eyJ1Ijoia2lyc2NoZXJyeSIsImEiOiJjbXJ3eTJyenAwYnhyMnlxMGJqaXI1d2kyIn0.o1RT7N039ClqF6ovbDPnhw';
 
 function initNightfallMap(popup) {
@@ -1620,8 +1489,7 @@ function initNightfallMap(popup) {
   map.scrollZoom.disable(); // keep page scroll usable; click the map to re-enable zoom
   map.on('click', () => map.scrollZoom.enable());
 
-  // manual +/- zoom buttons, top-right corner (compass hidden — this map
-  // doesn't rotate, so a compass button would just be dead weight)
+  // manual +/- zoom buttons, top-right corner
   map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
 
   map.on('load', () => {
@@ -1637,8 +1505,7 @@ function initNightfallMap(popup) {
           generateId: true
         });
 
-        // choropleth fill — same amber -> neutral -> violet ramp as the
-        // original, just with a lighter no-data tone to sit on white
+        // choropleth fill
         map.addLayer({
           id: 'sleep-fill',
           type: 'fill',
@@ -1739,11 +1606,6 @@ function initNightfallMap(popup) {
   const ro = new ResizeObserver(() => map.resize());
   ro.observe(container);
 
-  // the ResizeObserver above catches the popup itself being resized, but
-  // not a case where the popup's CSS size is relative to the browser
-  // window (e.g. a vw/vh-based width) — a plain browser resize wouldn't
-  // touch the popup's own box in that case, only its content. This
-  // listener catches that too, so the map re-fits whichever one moved.
   const handleWindowResize = () => map.resize();
   window.addEventListener('resize', handleWindowResize);
 
@@ -1764,15 +1626,13 @@ function attachDynamicCanvases(popup, key) {
     return;
   }
 
-  // loads the Dream Theory network diagram (D3.js) — sets its own
-  // ResizeObserver/cleanup, so it also returns early like 'o' above
+  // loads the Dream Theory network diagram (D3.js)
   if (key === 'n') {
     initNetworkDiagram(popup);
     return;
   }
 
-  // loads the Nightfall sleep map (Mapbox GL) — also sets its own
-  // ResizeObserver/cleanup, so it returns early too
+  // loads the Nightfall sleep map (Mapbox GL)
   if (key === 'g') {
     initNightfallMap(popup);
     return;
@@ -1920,8 +1780,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* ──────────────────────────────────────────────────────────── */
 
-// spawns small, randomly-sized bubbles that drift up and fade out
-// wherever the cursor moves, like bubbles being blown off a wand
+// spawns small, randomly-sized bubbles that drift up and fade out wherever the cursor moves
 function initCursorBubbles() {
   const layer = document.createElement('div');
   layer.className = 'cursor-bubble-layer';

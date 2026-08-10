@@ -1,9 +1,5 @@
   // ---------------------------------------------------------------
-  // 1. UI WIRING -- runs immediately, does not depend on Firebase.
-  //    This is intentionally separate from the Firebase code below,
-  //    so the whole page still works (tabs, drag, composing) even
-  //    if the Firebase scripts can't load (e.g. blocked network,
-  //    sandboxed preview, ad blocker).
+  // 1. UI WIRING 
   // ---------------------------------------------------------------
   const dreamWall = document.getElementById("dream-wall");
 
@@ -37,8 +33,7 @@
     });
   });
 
-  // Fallback fragments -- used to fill out the pool until enough dreams have
-  // been written (and to pad it out afterwards, so the pool never feels thin).
+  // Fallback fragments
   const FALLBACK_WORD_BANK = [
     "I", "a child", "my grandmother", "a stranger", "someone I used to know",
     "was flying", "was running", "disappeared", "opened a door", "followed a shadow", "forgot how to speak",
@@ -54,13 +49,6 @@
   let composition = [];
   let idCounter = 0;
 
-  // ---------------------------------------------------------------
-  // Word source for "Piece it together" -- built from the dream texts
-  // people have actually written in "Write it down" (this session's own
-  // submissions, plus whatever the live Dream Wall has loaded from
-  // Firestore). Falls back to FALLBACK_WORD_BANK to pad the pool when
-  // there isn't much written yet.
-  // ---------------------------------------------------------------
   let localWrittenTexts = [];   // texts submitted this session, kept even if the save itself fails
   let firestoreWrittenTexts = []; // texts pulled from the live Dream Wall
 
@@ -83,8 +71,7 @@
     return unique;
   }
 
-  // words from real dreams first, padded out with the fallback bank so the
-  // pool always has enough fragments to fill POOL_COUNT
+  // words from real dreams first, padded out with the fallback bank
   function currentWordBank() {
     const seen = new Set();
     const combined = [];
@@ -220,7 +207,7 @@
             el.style.opacity = "1";
           }
         } else {
-          // No real drag happened -- treat it as a tap: add the word directly.
+          // No real drag happened
           addWordToComposition(tile);
         }
       }
@@ -265,11 +252,7 @@
   }
 
   // ---------------------------------------------------------------
-  // 2. FIREBASE -- loaded separately and defensively. If this block
-  //    fails for any reason, everything above still works; only
-  //    saving/the live wall will be unavailable.
-  //    Replace firebaseConfig with your own project's config
-  //    (Project settings -> General -> Your apps -> SDK setup).
+  // 2. FIREBASE
   // ---------------------------------------------------------------
   const firebaseConfig = {
     apiKey: "AIzaSyB3Mzv_pDlBc7BMAy5TNZNoar-hTM06HPk",
@@ -318,8 +301,7 @@
       return;
     }
 
-    // "Piece it together" draws its words from what's actually been written
-    // here -- capture it right away, whether or not Firebase ends up saving.
+    // "Piece it together" draws its words from what's actually been written here
     localWrittenTexts.push(text);
 
     if (!dreamsRef) {
@@ -352,8 +334,7 @@
   });
 
   // ---------------------------------------------------------------
-  // Assembled-dream reveal popup -- shows the composed words one by
-  // one, animating in, when "Save my dream" is pressed.
+  // Assembled-dream reveal popup 
   // ---------------------------------------------------------------
   const revealOverlay = document.getElementById("dream-reveal");
   const revealWordsEl = document.getElementById("reveal-words");
@@ -385,9 +366,7 @@
   });
 
   // ---------------------------------------------------------------
-  // Assembled-dreams list popup -- keeps assembled entries out of the
-  // main write-it-down feed; they're only shown when this button/popup
-  // is opened on request.
+  // Assembled-dreams list popup 
   // ---------------------------------------------------------------
   let latestAssembledEntries = [];
   const assembledListOverlay = document.getElementById("assembled-list-overlay");
@@ -517,12 +496,7 @@
   }
 
   // ---------------------------------------------------------------
-  // 3. TALK IT THROUGH -- the chat tab. UI wiring runs immediately like
-  //    the rest of the page. Sending a message calls sendToDreamGuide()
-  //    from chat-bot.js (loaded before this file), which talks to OpenAI
-  //    directly. If that script or the API key isn't set up yet, it
-  //    fails gracefully -- the conversation still shows on-screen and
-  //    can still be saved to the wall.
+  // 3. TALK IT THROUGH 
   // ---------------------------------------------------------------
   const chatMessagesEl = document.getElementById("chat-messages");
   const chatInput = document.getElementById("chat-input");
@@ -602,7 +576,7 @@
   });
   chatInput.addEventListener("input", () => {
     chatInput.style.height = "auto";
-    chatInput.style.height = Math.min(chatInput.scrollHeight, 140) + "px";
+    chatInput.style.height = Math.min(chatInput.scrollHeight, 300) + "px";
   });
 
   chatSaveBtn.addEventListener("click", async () => {
@@ -611,7 +585,7 @@
     const text = userLines.join(" ");
 
     if (!dreamsRef) {
-      chatStatusEl.textContent = "Saved for this session -- connect Firebase above to add it to the shared wall.";
+      chatStatusEl.textContent = "Saved for this session: connect Firebase above to add it to the shared wall.";
       return;
     }
 
