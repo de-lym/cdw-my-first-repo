@@ -70,6 +70,19 @@ body {
   cursor: default;
 }
 
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+
+
 /* ── animated sky clouds ── */
 
 .sky {

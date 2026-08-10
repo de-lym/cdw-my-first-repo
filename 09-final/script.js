@@ -8,6 +8,18 @@ const letterContent = {
       <p>This project began with the visual aesthetic of Dreamcore, an internet aesthetic characterized by surreal, nostalgic, and liminal imagery that evokes the ambiguous feeling of dreams. Inspired by the Dreamcore aesthetic, the project expands beyond visual style to investigate dreams as a subject through interactive media and data visualization.</p>
       <p>The website combines creative coding, data visualization, and user participation to present multiple perspectives on dreaming. It includes interactive 2D and 3D shape explorations created with p5.js, data visualizations built with D3.js that illustrate sleep stages and dream theories, a geographic visualization of average sleeping hours across different countries using Mapbox, and a collaborative "Build Your Dream" page where anonymous visitor submissions are collected through Firebase and transformed into an evolving word puzzle.</p>
       <p>Rather than presenting dreams as a single narrative, the project creates a digital space where scientific research, psychological theories, personal experiences, and abstract visual forms coexist. Through interaction and exploration, visitors are invited to navigate the fluid boundaries between reality, memory, imagination, and dreams.</p>
+      <p>Each alphabetical bubble in the interface opens a window with a different aspect of the project, allowing visitors to explore the various components and perspectives on dreaming.</p>
+      <p>What dream do you want to explore?</p>
+        <ul>
+          <li> D - Home [intro]</li>
+          <li> R - Motivation [design influence]</li>
+          <li> E - 2D Spatial Canvases [p5.js exploration]</li>
+          <li> A - 3D Spatial Canvases [three.js exploration]</li>
+          <li> M - Build Your Dream [collaborative dream archive]</li>
+          <li> I - Dream Data Chart [D3.js visualization]</li>
+          <li> N - Dream Theory Network Diagram [network visualization]</li>
+          <li> G - Nightfall Sleep Map [Mapbox visualization]</li>
+        </ul>
     `,
   },
 

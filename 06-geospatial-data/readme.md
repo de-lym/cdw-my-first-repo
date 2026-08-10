@@ -1,182 +1,129 @@
-# Aesthetic.md
+# Nightfall
 
-# Dreamcore: Between Memory and Reality
+# Project Ideas
 
 ## Concept
 
-This website explores the feeling of being inside a dream rather than telling a linear story. It is inspired by the Dreamcore aesthetic, which combines nostalgia, liminal spaces, surreal imagery, and a quiet sense of uncertainty. Instead of presenting information directly, the website invites visitors to slowly explore an environment that feels familiar but impossible at the same time. Dreamcore often blurs the boundary between comfort and unease through dreamlike landscapes, soft colors, and fragmented memories. :contentReference[oaicite:0]{index=0}
+A world atlas of how long people sleep and when they go to bed. The object turns a global sleep-tracking dataset into a geographic field that can be explored country by country.
 
-The goal is to create an experience where users feel as if they are wandering through forgotten memories instead of navigating a traditional website.
+## Object Direction
 
----
+The object can be understood as a geography of rest. Instead of presenting sleep data as a ranked table, it makes differences in sleep spatial, allowing visitors to compare countries through geography, color, and interaction.
 
-# Visual Language
+## Spatial Experience
 
-## Color Palette
+Nightfall appears as a dedicated white map stage within the Dreamcore popup system. The map, legend, country labels, and explanatory text form a self-contained environment for exploring the dataset.
 
-The palette is soft and slightly faded to resemble old photographs and dream memories.
+## Interaction
 
-- Pale blue
-- Soft lavender
-- Warm cream
-- Light pink
-- Fog gray
-- Muted yellow
+Hovering or tapping a country reveals its average time in bed and typical bedtime. The visitor can move across the geographic field while the legend provides a consistent reference for interpreting the color scale.
 
-Bright colors are used sparingly to create moments that feel almost unreal, similar to sudden vivid details remembered from dreams. :contentReference[oaicite:1]{index=1}
+# Digital Objects
 
----
+## Digital Object
 
-## Typography
+Nightfall consists of an interactive world map, a sleep-duration color scale, country-level information, and a short methodological statement describing the 48-market sleep-tracking study.
 
-Typography should feel simple and familiar.
+Together, these elements transform a global dataset into an exploratory geographic object rather than a static data display.
 
-- Sans-serif fonts for readability
-- Bubble-like bold fonts for the main page to emphasize the aesthetics of dreamcore
-- Large headings with generous spacing
-- Small body text
-- Occasional lowercase titles
-- Plenty of whitespace
+## Data and Content
 
-Rather than dramatic typography, the atmosphere comes from spacing and composition.
+The primary material is the sleep-tracking dataset. Each country is represented through its geographic position, average time in bed, and typical bedtime.
 
----
+Warm amber represents less time in bed, while cool violet represents more. Countries without comparable data remain gray so that missing or unavailable information is visually explicit rather than being mistaken for a value.
 
-# Layout
+The object also includes concise explanatory text that gives visitors enough context to understand what the data represents without interrupting the map experience.
 
-The layout is minimal and spacious.
+## Spatial Composition
 
-Adopted by the main page of Hayden Clay's portfolio website, bubbles with letters are placed with with generous negative space.
-Little web browser with further information will pop up as user clicks each bubbles.
-Navigation remains simple while allowing the content to become the primary visual focus.
+A dedicated white map stage contains the world map, gradient legend, country labels at the range endpoints, and a short interaction caption.
 
----
+The map lives inside the Dreamcore popup system but maintains its own restrained editorial visual language.
 
-# Motion
+## Technical Character
 
-Animation is subtle.
+Mapbox GL renders the geographic layer. GeoJSON provides country geometries, while the sleep dataset supplies the values used for the choropleth-style coloring and country interaction.
 
-Examples include:
+The relationship between geography and data is part of the computational character of the object: the visual field changes according to the underlying sleep values rather than using geography as a purely decorative backdrop.
 
-- slow moving of the clouds on the background
-- gentle opacity transitions
-- floating movement
-- little delay on appearance of web browser
-- smooth transition
+# Aesthetic
 
-Movement should resemble drifting through a dream instead of interacting with a conventional interface.
+## Visual Language
 
----
+Nightfall uses a restrained editorial language that contrasts with the more atmospheric Dreamcore environment. The white map stage creates a clear analytical surface while the color field introduces the dream-related qualities of warmth, darkness, and variation.
 
-# Interaction
+### Color Palette
 
-The website encourages quiet exploration.
+Warm amber marks less time in bed and cool violet marks more. Unmatched countries remain gray so the absence of comparable data is visually explicit.
 
-Interactions include:
+The color scale should remain continuous and legible, allowing visitors to understand relative differences without requiring a ranked list.
 
-- hover effects that highlights selected bubbles
-- smooth transitions between sections
-- background animation
-- large clickable buttons
-- minimal buttons
+### Typography
 
-Navigation should feel natural and almost invisible.
+The map uses a restrained hierarchy: a small digital-object label, a large Nightfall title, a short subtitle, map legend, country information, and concise explanatory text.
 
----
+Typography should support the map rather than compete with it, keeping the geographic field as the primary visual element.
 
-# Atmosphere
+## Layout
 
-The emotional tone combines:
+The map occupies the main visual field, with the legend and supporting information positioned so they remain accessible without interrupting geographic exploration.
 
-- nostalgia
-- curiosity
-- loneliness
-- comfort
-- wonder
-- uncertainty
+Country labels appear only where they help establish the range of the dataset, while detailed information is revealed through interaction.
 
-Rather than providing clear answers, the website encourages visitors to interpret the experience for themselves.
+## Motion
 
----
+The map is primarily spatial rather than animated. Movement comes from navigation, hover and tap states, and subtle transitions when country information appears.
 
-# Website Components
+Motion should communicate geographic exploration without turning the data visualization into spectacle.
 
-## HTML
+## Atmosphere
 
-The website is intentionally minimal, with the entire homepage functioning as an interactive dream landscape rather than a traditional navigation menu.
+Nightfall should feel quiet, analytical, and contemplative. The restrained map environment creates a contrast between measurable sleep behavior and the subjective, atmospheric nature of dreaming.
 
-The HTML consists of:
+The object should encourage comparison and observation rather than direct visitors toward a predetermined conclusion.
 
-- A full-screen animated sky containing multiple drifting clouds.
-- A translucent liminal pool that spans the bottom of the page, suggesting an endless reflective space.
-- VHS scanline and grain overlay layers that recreate the appearance of an old videotape.
-- Eight floating bubble buttons positioned freely across the screen. Each bubble represents a different page or fragment of the archive rather than a conventional navigation item.
-- A popup layer where content windows are dynamically generated when users interact with the bubbles.
+## Website Components
 
-Instead of dividing the website into multiple visible pages, the homepage acts as a single dream environment where information appears as movable windows.
+### HTML
 
----
+The HTML establishes Nightfall as a self-contained data visualization with a clear title, subtitle, map stage, legend, country information, methodological text, and supporting interface elements.
 
-## CSS
+The structure should keep the geographic visualization central while making the meaning of the data accessible.
 
-The visual design recreates the atmosphere of Dreamcore through subtle animation and layered effects rather than complex graphics.
+### CSS
 
-Key styling features include:
+The CSS creates the white map stage and restrained editorial hierarchy while maintaining the relationship between Nightfall and the wider Dream Archive.
 
-- A vertical pastel gradient background transitioning from blue to lavender and peach to resemble an early evening sky.
-- Continuously drifting procedural clouds that slowly move across the screen, reinforcing the feeling of time passing.
-- A translucent "liminal pool" at the bottom of the viewport with gentle shimmering animation.
-- VHS-inspired scanlines and animated film grain overlays that simulate nostalgic analog media.
-- Floating translucent bubbles created with gradients, blur, reflections, and soft shadows to resemble soap bubbles suspended in the air.
-- Glassmorphism-inspired popup windows with blurred backgrounds, semi-transparent surfaces, and soft shadows.
-- Responsive layouts that reposition the floating bubbles on smaller screens while preserving the overall composition.
+It should support the map, legend, labels, hover states, and responsive information without introducing unnecessary interface decoration.
 
-Typography combines playful and technical aesthetics:
+### JavaScript
 
-- **Bagel Fat One** is used for the floating bubble letters, giving them a childlike and dreamlike personality.
-- **Space Mono** is used for window titles and interface elements, evoking old computer systems.
-- **IBM Plex Mono** is used for the body text, reinforcing the feeling of reading archived digital documents.
+The JavaScript manages the map, country interactions, data-driven color values, hover and tap states, and the display of country-level information.
 
-The overall color palette consists of faded blues, lavenders, warm peach tones, and translucent whites that create a calm yet uncanny atmosphere.
-
----
-
-## JavaScript
-
-JavaScript transforms the homepage into an interactive dream archive rather than a static website.
-
-Its primary functions include:
-
-- Opening unique popup windows when each floating bubble is clicked.
-- Dynamically generating each window from predefined content stored as JavaScript objects instead of separate HTML pages.
-- Creating draggable windows that users can freely move around the screen, mimicking an old desktop operating system.
-- Managing window focus through z-index so the active window always appears above the others.
-- Animating windows as they open and close to preserve a smooth, dreamlike interaction.
-- Triggering an interactive "dream mode" where pressing the **Enter the Pool** button changes the atmosphere and reveals randomly selected surreal messages such as memories, announcements, or impossible observations.
-- Using randomness so each interaction can produce a different fragment of text, making the experience feel unpredictable and dream-like.
-
-Rather than providing linear navigation, JavaScript allows visitors to construct their own path through scattered memories and fragmented stories.
-
-- Section switching
-- Active navigation state
-- Smooth transitions
-- Default landing section
-- Interactive media controls
-
----
+The interaction should make the relationship between geographic location and sleep data immediately understandable.
 
 # Design Principles
 
-- Less information, more atmosphere.
-- Empty space is as important as content.
-- Navigation should disappear into the experience.
-- Every interaction should feel calm and slow.
-- The website should feel like exploring a memory instead of reading a webpage.
+## Geography as Data
 
----
+Use geography as an active way of understanding the dataset rather than as a decorative background. Spatial proximity, country boundaries, and regional differences should contribute to how visitors read the information.
 
-# References
+## Make Comparison Visible
 
-- Dreamcore Aesthetic Wiki
-- Hayden Clay Portfolio
-- Dreamcore visual essays and ambient YouTube videos
+Allow visitors to compare sleep patterns through color and location rather than requiring them to read a ranked table.
+
+## Make Absence Visible
+
+Missing or unmatched countries should remain visually distinct. The visualization should communicate the limits of the dataset rather than implying that every country has a comparable measurement.
+
+## Context Without Overload
+
+Provide enough methodological and explanatory information for visitors to understand the visualization while keeping the map itself as the primary experience.
+
+## Direct Exploration
+
+Let visitors discover individual values through hovering, tapping, and moving across the map. Interaction should reveal detail without requiring unnecessary controls.
+
+## Archive Cohesion
+
+Nightfall should remain recognizable as part of the Dream Archive while maintaining its own analytical identity. Its restrained map environment can contrast with the softer visual language of other objects without feeling disconnected from them.
