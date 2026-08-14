@@ -272,7 +272,7 @@
   //    (Project settings -> General -> Your apps -> SDK setup).
   // ---------------------------------------------------------------
   const firebaseConfig = {
-    apiKey: "AIzaSyB3Mzv_pDlBc7BMAy5TNZNoar-hTM06HPk",
+    apiKey: "API-KEY",
     authDomain: "cdw-delym-engagecomp.firebaseapp.com",
     projectId: "cdw-delym-engagecomp",
     storageBucket: "cdw-delym-engagecomp.firebasestorage.app",
