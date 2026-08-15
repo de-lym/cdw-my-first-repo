@@ -276,9 +276,9 @@
     authDomain: "cdw-delym-engagecomp.firebaseapp.com",
     projectId: "cdw-delym-engagecomp",
     storageBucket: "cdw-delym-engagecomp.firebasestorage.app",
-    messagingSenderId: "216800929839",
-    appId: "1:216800929839:web:9159d2e6bbd8742e7cbeda",
-    measurementId: "G-H9NGYTXJP5"
+    messagingSenderId: "",
+    appId: "",
+    measurementId: ""
   };
 
   let dreamsRef = null;

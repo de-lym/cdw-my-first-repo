@@ -12,7 +12,7 @@
 // regenerating/deleting it once the assignment is graded.
 // ---------------------------------------------------------------
 
-const OPENAI_API_KEY = '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';
+const OPENAI_API_KEY = 'API_KEY_HERE';
 
 // The dream guide's persona and behavior rules. Kept here, in one place,
 // rather than scattered through dream-composer.js.
@@ -46,7 +46,7 @@ async function sendToDreamGuide(messages) {
   if (!Array.isArray(messages) || messages.length === 0) {
     throw new Error("messages must be a non-empty array.");
   }
-  if (!OPENAI_API_KEY || OPENAI_API_KEY === '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') {
+  if (!OPENAI_API_KEY || OPENAI_API_KEY === 'API_KEY_HERE') {
     throw new Error("Add your OpenAI API key to chat-bot.js first.");
   }
 
